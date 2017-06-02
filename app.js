@@ -1,7 +1,6 @@
 const sphero = require("sphero");
 const readline = require('readline');
 
-/*
 orb_chris = sphero("COM6");
 orb_serli = sphero("COM4");
 
@@ -18,7 +17,7 @@ orb_serli.connect(function () {
     });
     orb_serli.color('red');
 });
-*/
+
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 process.stdin.on('keypress', (str, key) => {
