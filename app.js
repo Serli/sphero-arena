@@ -1,16 +1,16 @@
 const sphero = require("sphero");
 const readline = require('readline');
 
-orb_chris = sphero("COM6");
+//orb_chris = sphero("COM6");
 orb_serli = sphero("COM4");
-
+/*
 orb_chris.connect(function () {
     orb_chris.on("error", function(err, data) {
         if (err) { console.log(err); }
     });
     orb_chris.color('blue');
 });
-
+*/
 orb_serli.connect(function () {
     orb_serli.on("error", function(err, data) {
         if (err) { console.log(err); }
@@ -31,16 +31,25 @@ process.stdin.on('keypress', (str, key) => {
     else if(key.name === '2'){
         console.log('orb chris')
     }
-    else if(key.name === 'up'){
-        console.log('up')
-    }
-    else if(key.name === 'right'){
-        console.log('right')
-    }
-    else if(key.name === 'left'){
-        console.log('left')
-    }
-
+    moveOrb(orb_serli, key);
 }
 });
-console.log('Press any key...');
+
+
+
+function moveOrb(orb, key) {
+    if(key.name === 'up'){
+        console.log('up');
+        orb.roll(60,0);
+    }
+    else if(key.name === 'right'){
+        console.log('right');
+    }
+    else if(key.name === 'left'){
+        console.log('left');
+    }
+    else if(key.name === 'down'){
+        console.log('down');
+        orb.stop();
+    }
+}
