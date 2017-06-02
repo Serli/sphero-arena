@@ -1,6 +1,7 @@
 const sphero = require("sphero");
 
 orb_chris = sphero("COM6");
+orb_serli = sphero("COM4");
 
 orb_chris.connect(function () {
     orb_chris.on("error", function(err, data) {
@@ -9,4 +10,10 @@ orb_chris.connect(function () {
     orb_chris.color('blue');
 });
 
+orb_serli.connect(function () {
+    orb_serli.on("error", function(err, data) {
+        if (err) { console.log(err); }
+    });
+    orb_serli.color('red');
+});
 
