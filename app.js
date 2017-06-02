@@ -34,14 +34,15 @@ orb_serli.connect(function () {
 let orb;
 let heading = 0;
 
+//Keyboard keys listeners
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 process.stdin.on('keypress', (str, key) => {
+    //terminate process command Ctrl+C
     if (key.ctrl && key.name === 'c') {
     process.exit();
 } else {
-    console.log(`You pressed the "${str}" key`);
-
+    //orb selection with keyboard numbers
     if(key.name === '1'){
         console.log('orb serli selected');
         orb = orb_serli;
@@ -54,12 +55,14 @@ process.stdin.on('keypress', (str, key) => {
     try {
         moveOrb(orb, key);
     }
+    //Exception if no orb selected
     catch (e) {
         console.log('select an orb by pressing 1 key for Serli Orb and 2 for Chris Orb ')
     }
 }
 });
 
+//The orb can move forward, stop, turn right and left, shoot
 function moveOrb(orb, key) {
     if(key.name === 'up'){
         console.log('FORWARD');
