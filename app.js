@@ -8,24 +8,26 @@ if(process.argv[2]){
         orb_chris = sphero(process.argv[3]);
     }
 }else{
-    orb_chris = sphero("COM6");
+    //orb_chris = sphero("COM6");
     orb_serli = sphero("COM4");
 }
-
+/*
 //orbs connections
 orb_chris.connect(function () {
     orb_chris.on("error", function(err, data) {
         if (err) { console.log(err); }
     });
+    orb_chris.ping();
     orb_chris.color('blue');
     orb_chris.setTempOptionFlags(0x08); // Back light always on
     orb_chris.setBackLed(255); // Full intensity
 });
-
+*/
 orb_serli.connect(function () {
     orb_serli.on("error", function(err, data) {
         if (err) { console.log(err); }
     });
+    orb_serli.ping();
     orb_serli.color('gold');
     orb_serli.setTempOptionFlags(0x08); // Back light always on
     orb_serli.setBackLed(255); // Full intensity
@@ -46,10 +48,16 @@ process.stdin.on('keypress', (str, key) => {
     if(key.name === '1'){
         console.log('orb serli selected');
         orb = orb_serli;
+        console.log(orb);
+        orb.getAutoReconnect();
+        orb.setDeviceName('orb_serli');
     }
     else if(key.name === '2'){
         orb = orb_chris;
+        console.log(orb);
+        orb.getAutoReconnect();
         console.log('orb chris selected');
+        console.log(orb.connection.conn);
     }
 
     try {
@@ -64,6 +72,11 @@ process.stdin.on('keypress', (str, key) => {
 
 //The orb can move forward, stop, turn right and left, shoot
 function moveOrb(orb, key) {
+    if(heading >= 340){
+        heading = 0;
+    }else if (heading < 0) {
+        heading = 340;
+    }
     if(key.name === 'up'){
         console.log('FORWARD');
         orb.roll(60, heading);
@@ -71,17 +84,20 @@ function moveOrb(orb, key) {
     else if(key.name === 'right'){
         console.log('RIGHT');
         orb.roll(1, heading+=20, 2);
+        console.log(heading);
     }
     else if(key.name === 'left'){
         console.log('LEFT');
         orb.roll(1, heading-=20, 2);
+        console.log(heading);
     }
     else if(key.name === 'down'){
         console.log('STOP');
-        orb.stop();
+        orb.roll(0, heading);
+        //orb.stop();
     }
     else if(key.name === 'space'){
         console.log('SHOOT');
-        orb.stop();
+        orb.roll(0, heading);
     }
 }
