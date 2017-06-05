@@ -31,10 +31,33 @@ orb_serli.connect(function () {
     orb_serli.color('gold');
     orb_serli.setTempOptionFlags(0x08); // Back light always on
     orb_serli.setBackLed(255); // Full intensity
+
+    let opts = {
+        flags: 0x01,
+        x: 0x0000,
+        y: 0x0000,
+        yawTare: 0x0
+    };
+
+    orb_serli.configureLocator(opts);
+
+    setInterval(function() {
+        orb_serli.readLocator(function(err, data) {
+            if (err) {
+                console.log("error: ", err);
+            } else {
+                console.log("readLocator:");
+                console.log("  xpos:", data.xpos);
+                console.log("  ypos:", data.ypos);
+            }
+        });
+    }, 1000);
 });
 
 let orb;
 let heading = 0;
+let orb_serli_X = 0;
+let orb_serli_Y = 0;
 
 //Keyboard keys listeners
 readline.emitKeypressEvents(process.stdin);
@@ -77,6 +100,7 @@ function moveOrb(orb, key) {
     }else if (heading < 0) {
         heading = 340;
     }
+
     if(key.name === 'up'){
         console.log('FORWARD');
         orb.roll(60, heading);
