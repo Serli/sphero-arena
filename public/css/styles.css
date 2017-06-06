@@ -16,3 +16,16 @@ input#middle {
     width: 175px;
     height:175px;
 }
+
+
+input#pause {
+    background-image: url(../icons/pause.png);
+    width: 175px;
+    height:175px;
+}
+
+div#middle-button{
+    text-align:center;
+    width: 525px;
+    height: 175px;
+}
