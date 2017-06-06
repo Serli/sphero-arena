@@ -8,10 +8,10 @@ if(process.argv[2]){
         orb_chris = sphero(process.argv[3]);
     }
 }else{
-    //orb_chris = sphero("COM6");
+    orb_chris = sphero("COM6");
     orb_serli = sphero("COM4");
 }
-/*
+
 //orbs connections
 orb_chris.connect(function () {
     orb_chris.on("error", function(err, data) {
@@ -21,8 +21,29 @@ orb_chris.connect(function () {
     orb_chris.color('blue');
     orb_chris.setTempOptionFlags(0x08); // Back light always on
     orb_chris.setBackLed(255); // Full intensity
+
+    let opts = {
+        flags: 0x01,
+        x: 0x0000,
+        y: 0x0000,
+        yawTare: 0x0
+    };
+
+    orb_chris.configureLocator(opts);
+
+    setInterval(function() {
+        orb_chris.readLocator(function(err, data) {
+            if (err) {
+                console.log("error: ", err);
+            } else {
+                console.log("chris readLocator:");
+                console.log("  xpos:", data.xpos);
+                console.log("  ypos:", data.ypos);
+            }
+        });
+    }, 1000);
 });
-*/
+
 orb_serli.connect(function () {
     orb_serli.on("error", function(err, data) {
         if (err) { console.log(err); }
@@ -46,7 +67,7 @@ orb_serli.connect(function () {
             if (err) {
                 console.log("error: ", err);
             } else {
-                console.log("readLocator:");
+                console.log("serli readLocator:");
                 console.log("  xpos:", data.xpos);
                 console.log("  ypos:", data.ypos);
             }
@@ -56,8 +77,6 @@ orb_serli.connect(function () {
 
 let orb;
 let heading = 0;
-let orb_serli_X = 0;
-let orb_serli_Y = 0;
 
 //Keyboard keys listeners
 readline.emitKeypressEvents(process.stdin);
@@ -72,13 +91,10 @@ process.stdin.on('keypress', (str, key) => {
         console.log('orb serli selected');
         orb = orb_serli;
         console.log(orb);
-        orb.getAutoReconnect();
-        orb.setDeviceName('orb_serli');
     }
     else if(key.name === '2'){
         orb = orb_chris;
         console.log(orb);
-        orb.getAutoReconnect();
         console.log('orb chris selected');
         console.log(orb.connection.conn);
     }
@@ -118,7 +134,6 @@ function moveOrb(orb, key) {
     else if(key.name === 'down'){
         console.log('STOP');
         orb.roll(0, heading);
-        //orb.stop();
     }
     else if(key.name === 'space'){
         console.log('SHOOT');
