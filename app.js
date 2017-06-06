@@ -1,5 +1,8 @@
 const sphero = require("sphero");
 const readline = require('readline');
+const server = require('./server.js');
+
+server.start();
 
 //orb object creation, defaults ports or ports passed in arguments
 if(process.argv[2]){
@@ -14,65 +17,11 @@ if(process.argv[2]){
 
 //orbs connections
 orb_chris.connect(function () {
-    orb_chris.on("error", function(err, data) {
-        if (err) { console.log(err); }
-    });
-    orb_chris.ping();
-    orb_chris.color('blue');
-    orb_chris.setTempOptionFlags(0x08); // Back light always on
-    orb_chris.setBackLed(255); // Full intensity
-
-    let opts = {
-        flags: 0x01,
-        x: 0x0000,
-        y: 0x0000,
-        yawTare: 0x0
-    };
-
-    orb_chris.configureLocator(opts);
-
-    setInterval(function() {
-        orb_chris.readLocator(function(err, data) {
-            if (err) {
-                console.log("error: ", err);
-            } else {
-                console.log("chris readLocator:");
-                console.log("  xpos:", data.xpos);
-                console.log("  ypos:", data.ypos);
-            }
-        });
-    }, 1000);
+    orbSetup(orb_chris, 'blue');
 });
 
 orb_serli.connect(function () {
-    orb_serli.on("error", function(err, data) {
-        if (err) { console.log(err); }
-    });
-    orb_serli.ping();
-    orb_serli.color('gold');
-    orb_serli.setTempOptionFlags(0x08); // Back light always on
-    orb_serli.setBackLed(255); // Full intensity
-
-    let opts = {
-        flags: 0x01,
-        x: 0x0000,
-        y: 0x0000,
-        yawTare: 0x0
-    };
-
-    orb_serli.configureLocator(opts);
-
-    setInterval(function() {
-        orb_serli.readLocator(function(err, data) {
-            if (err) {
-                console.log("error: ", err);
-            } else {
-                console.log("serli readLocator:");
-                console.log("  xpos:", data.xpos);
-                console.log("  ypos:", data.ypos);
-            }
-        });
-    }, 1000);
+    orbSetup(orb_serli, 'gold');
 });
 
 let orb;
@@ -140,3 +89,37 @@ function moveOrb(orb, key) {
         orb.roll(0, heading);
     }
 }
+
+
+function orbSetup(orb, color){
+    orb.on("error", function(err, data) {
+        if (err) { console.log(err); }
+    });
+    orb.ping();
+    orb.color(color);
+    orb.setTempOptionFlags(0x08); // Back light always on
+    orb.setBackLed(255); // Full intensity
+
+    let opts = {
+        flags: 0x01,
+        x: 0x0000,
+        y: 0x0000,
+        yawTare: 0x0
+    };
+
+    orb.configureLocator(opts);
+
+    setInterval(function() {
+        orb.readLocator(function(err, data) {
+            if (err) {
+                console.log("error: ", err);
+            } else {
+                console.log(orb.connection.conn, "readLocator:");
+                console.log("  xpos:", data.xpos);
+                console.log("  ypos:", data.ypos);
+            }
+        });
+    }, 1000);
+}
+
+module.exports = server;
