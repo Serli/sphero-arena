@@ -8,7 +8,7 @@ server.start();
 if(process.argv[2]){
     orb_chris = sphero(process.argv[2]);
     if (process.argv[3]){
-        orb_chris = sphero(process.argv[3]);
+        orb_serli = sphero(process.argv[3]);
     }
 }else{
     orb_chris = sphero("COM6");
