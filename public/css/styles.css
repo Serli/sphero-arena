@@ -1,3 +1,18 @@
-body {
-    background-color: lightblue;
+input#right {
+    background-image: url(../icons/arrow_right.png);
+    width: 175px;
+    height:175px;
+}
+
+input#left {
+    background-image: url(../icons/arrow_left.png);
+    width: 175px;
+    height:175px;
+}
+
+
+input#middle {
+    background-image: url(../icons/arrow_middle.png);
+    width: 175px;
+    height:175px;
 }
