@@ -13,7 +13,7 @@ if(process.argv[2]){
     }
 }else{
     //orb_chris = sphero("COM6");
-    orb_serli = sphero("COM4");
+    //orb_serli = sphero("COM4");
 }
 
 //orbs connections
@@ -21,11 +21,11 @@ if(process.argv[2]){
 orb_chris.connect(function () {
     util.orbSetup(orb_chris, 'blue');
 });
-*/
+
 orb_serli.connect(function () {
     util.orbSetup(orb_serli, 'gold');
 });
-
+*/
 let orb;
 let heading = 0;
 
@@ -47,7 +47,6 @@ process.stdin.on('keypress', (str, key) => {
         orb = orb_chris;
         console.log(orb);
         console.log('orb chris selected');
-        console.log(orb.connection.conn);
     }
 
     try {
