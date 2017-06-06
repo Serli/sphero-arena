@@ -5,10 +5,10 @@ const express = require('express');
 const app = express();
 
 // Bootstrap application settings
-require('./service/express')(app);
+require('./express')(app);
 
 // Bootstrap routes
-require('./service/routes')(app);
+require('./routes')(app);
 
 let server;
 
