@@ -1,29 +1,16 @@
 //require modules
-const express = require('express');
-
-//create web server
-const app = express();
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 // Bootstrap application settings
 require('./express')(app);
 
 // Bootstrap routes
-require('./routes')(app);
-
-let server;
+require('./routes')(app, io);
 
 exports.start = function() {
-    server = app.listen(8010, function () {
-        const host = server.address().address;
-        const port = server.address().port;
-        console.log("Sphero-arena service listening at http://%s:%s", host, port)
-    });
-
-    const io = require('socket.io').listen(server);
-
-    io.on('connection', function(socket){
-        console.log('a user connected');
-    });
+    server.listen(8010);
 };
 
 exports.close = function () {

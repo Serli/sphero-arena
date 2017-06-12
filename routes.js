@@ -1,7 +1,12 @@
 
-module.exports = function (app) {
+module.exports = function (app, io) {
     app.get('/', function(req, res) {
       res.sendFile(__dirname + "/public/views/" + "index.htm");
+    });
+
+
+    io.on('connection', function(socket){
+        console.log('a user connected');
     });
 
     //app.post('/processmessage', processMessage);
