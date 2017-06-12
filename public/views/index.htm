@@ -1,8 +1,12 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+        <script src="/socket.io/socket.io.js"></script>
     </head>
     <body>
+        <script>
+            var socket = io();
+        </script>
         <form action = "http://127.0.0.1:8010/processmessage" method = "POST">
           Commande pour le Sphero <input type="text" name="message">
           <input type="submit" value="Envoyer">
@@ -11,8 +15,19 @@
             <input type="button" id="middle"/>
         </div>
         <br>
-        <input type="button" id="left"/>
+        <input type="button" id="left"  onclick="getElementById('demo').innerHTML=Date()"/>
         <input type="button" id="pause"/>
         <input type="button" id="right"/>
+
+        <button id="orbCOM4">COM4 orb</button>
+        <input type="button" class="orb"/>
+
+
+        <p id="demo">Click me</p>
+
+        <ul id="messages"></ul>
+        <form action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
     </body>
 </html>

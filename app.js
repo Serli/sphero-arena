@@ -12,8 +12,8 @@ if(process.argv[2]){
         orb_serli = sphero(process.argv[3]);
     }
 }else{
-    //orb_chris = sphero("COM6");
-    //orb_serli = sphero("COM4");
+//    orb_chris = sphero("COM6");
+  //  orb_serli = sphero("COM4");
 }
 
 //orbs connections
@@ -50,7 +50,7 @@ process.stdin.on('keypress', (str, key) => {
     }
 
     try {
-        moveOrb(orb, key);
+  //      moveOrb(key);
     }
     //Exception if no orb selected
     catch (e) {
@@ -60,7 +60,7 @@ process.stdin.on('keypress', (str, key) => {
 });
 
 //The orb can move forward, stop, turn right and left, shoot
-function moveOrb(orb, key) {
+function moveOrb(key) {
     //Orb can make complete turns
     if(heading >= 340){
         heading = 0;
@@ -71,25 +71,30 @@ function moveOrb(orb, key) {
     //Listening keys to move the orb
     if(key.name === 'up'){
         console.log('FORWARD');
-        orb.roll(60, heading);
+        orb_serli.roll(60, heading);
+        orb_chris.roll(60, heading);
     }
     else if(key.name === 'right'){
         console.log('RIGHT');
-        orb.roll(1, heading+=20, 2);
+        orb_serli.roll(1, heading+=20, 2);
+        orb_chris.roll(1, heading+=20, 2);
         console.log(heading);
     }
     else if(key.name === 'left'){
         console.log('LEFT');
-        orb.roll(1, heading-=20, 2);
+        orb_serli.roll(1, heading-=20, 2);
+        orb_chris.roll(1, heading-=20, 2);
         console.log(heading);
     }
     else if(key.name === 'down'){
         console.log('STOP');
-        orb.roll(0, heading);
+        orb_chris.roll(0, heading);
+        orb_serli.roll(0, heading);
     }
     else if(key.name === 'space'){
         console.log('SHOOT');
-        orb.roll(0, heading);
+        orb_chris.roll(0, heading);
+        orb_serli.roll(0, heading);
     }
 }
 

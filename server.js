@@ -18,6 +18,12 @@ exports.start = function() {
         const port = server.address().port;
         console.log("Sphero-arena service listening at http://%s:%s", host, port)
     });
+
+    const io = require('socket.io').listen(server);
+
+    io.on('connection', function(socket){
+        console.log('a user connected');
+    });
 };
 
 exports.close = function () {
