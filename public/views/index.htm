@@ -5,22 +5,22 @@
     </head>
     <body>
         <script>
-            var socket = io();
+            const socket = io();
         </script>
         <form action = "http://127.0.0.1:8010/processmessage" method = "POST">
           Commande pour le Sphero <input type="text" name="message">
           <input type="submit" value="Envoyer">
         </form>
         <div id="middle-button">
-            <input type="button" id="middle"/>
+            <input type="button" id="middle" onclick="socket.emit('go forward')"/>
         </div>
         <br>
-        <input type="button" id="left"  onclick="getElementById('demo').innerHTML=Date()"/>
-        <input type="button" id="pause"/>
-        <input type="button" id="right"/>
+        <input type="button" id="left"  onclick="socket.emit('left')"/>
+        <input type="button" id="pause" onclick="socket.emit('stop')"/>
+        <input type="button" id="right" onclick="socket.emit('right')"/>
 
-        <button id="orbCOM4">COM4 orb</button>
-        <input type="button" class="orb"/>
+        <button id="orbCOM4" onclick="socket.emit('connect orb', 'COM4')">COM4 orb </button>
+        <button id="orbCOM6" onclick="socket.emit('connect orb', 'COM6')">COM6 orb </button>
 
 
         <p id="demo">Click me</p>
