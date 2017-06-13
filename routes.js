@@ -8,7 +8,12 @@ module.exports = function (app, io) {
       res.sendFile(__dirname + "/public/views/" + "index.htm");
     });
 
-    let orb;
+    app.get('/controls', function(req, res) {
+        res.sendFile(__dirname + "/public/views/" + "controls.htm");
+    });
+
+    let orb_serli;
+    let orb_chris;
     let heading = 0;
 
     io.on('connection', function(socket){
@@ -22,16 +27,31 @@ module.exports = function (app, io) {
         socket.on('message', function(msg){
             console.log('message: ' + msg);
         });
-        socket.on('go forward', function(){
-            console.log('go forward');
-            orb.roll(60, heading);
-        });
         socket.on('connect orb', function(port){
             console.log('connect orb');
-            orb = sphero(port);
-            orb.connect(function () {
-                util.orbSetup(orb, 'gold');
-            });
+            if(port === 'COM4'){
+                orb_serli = sphero(port);
+                orb_serli.connect(function () {
+                    util.orbSetup(orb_serli, 'gold');
+                });
+            }
+            else if(port === 'COM6'){
+                orb_chris = sphero(port);
+                orb_chris.connect(function () {
+                    util.orbSetup(orb_chris, 'gold');
+                });
+            }
+        });
+        socket.on('go forward', function(){
+            console.log('go forward');
+            if(orb_chris && !orb_serli){
+                orb_chris.roll(60, heading);
+            }else if(!orb_chris && orb_serli){
+                orb_serli.roll(60, heading);
+            }else if(orb_chris && orb_serli){
+                orb_chris.roll(60, heading);
+                orb_serli.roll(60, heading);
+            }
         });
         socket.on('stop', function(){
             console.log('stop');
