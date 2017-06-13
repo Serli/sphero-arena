@@ -48,7 +48,7 @@ module.exports = function (app, io) {
             orb.roll(1, heading+=20, 2);
         });
     });
-    
+
     // catch-all
     app.get('*', function (req, res) { res.status(404).json({ error:'Invalid GET request' });});
     app.post('*', function (req, res) {res.status(404).json({ error:'Invalid POST request' }); });
