@@ -4,7 +4,6 @@ const favicon = require('serve-favicon');
 const join = require('path').join;
 const parseurl = require('parseurl');
 const session = require('express-session');
-const store  = new express.session.MemoryStore;
 
 module.exports = function (app) {
     app.use(bodyParser.json()); // for parsing application/json
@@ -14,12 +13,10 @@ module.exports = function (app) {
     app.use(session({
         secret: 'keyboard cat',
         resave: false,
-        store:store,
         saveUninitialized: true
     }));
 
     app.use(function (req, res, next) {
-        console.log(req.session);
         let views = req.session.views;
 
         if (!views) {
