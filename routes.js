@@ -2,7 +2,6 @@ const sphero = require("sphero");
 const util = require('./util.js');
 
 
-
 module.exports = function (app, io) {
     app.get('/', function(req, res) {
       res.sendFile(__dirname + "/public/views/" + "index.htm");
@@ -10,6 +9,13 @@ module.exports = function (app, io) {
 
     app.get('/controls', function(req, res) {
         res.sendFile(__dirname + "/public/views/" + "controls.htm");
+    });
+
+    // routes will go here
+    app.get('/orb', function(req, res) {
+        let orbId = req.param('port');
+        console.log(req.params);
+        res.send(orbId);
     });
 
     let orb_serli;
@@ -41,6 +47,16 @@ module.exports = function (app, io) {
                     util.orbSetup(orb_chris, 'gold');
                 });
             }
+        });
+        socket.on('ping orb', function(msg){
+            console.log('ping orb');
+            if(msg ==='COM4'){
+                orb_serli.ping();
+            }
+            else if(msg ==='COM6'){
+                orb_chris.ping();
+            }
+
         });
         socket.on('go forward', function(){
             console.log('go forward');
