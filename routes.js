@@ -1,5 +1,6 @@
 const sphero = require("sphero");
 const util = require('./util.js');
+import * as store from "express-session/session/memory";
 
 
 module.exports = function (app, io) {
@@ -24,14 +25,21 @@ module.exports = function (app, io) {
     app.get('/orb', function(req, res) {
         let orbId = req.param('port');
         req.session.orb = sphero(orbId);
+        console.log(req.sessionID);
         res.send(orbId);
     });
-
-    console.log(app);
 
     let orb_serli;
     let orb_chris;
     let heading = 0;
+
+    store.get(sid, function(err, session) {
+        if (err || !session) {
+            // Do some error handling, bail.
+            return;
+        }
+        console.log(session);
+    });
 
     io.on('connection', function(socket){
         console.log(socket);
