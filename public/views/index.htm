@@ -8,6 +8,13 @@
             const socket = io();
         </script>
 
+        <form action="/orb" method="get">
+            <input type="checkbox" name="port" value="COM4"> I have a bike<br>
+            <input type="checkbox" name="port" value="COM6" checked> I have a car<br>
+            <input type="submit" value="Submit">
+        </form>
+
+
         <button id="orbCOM4" onclick="socket.emit('connect orb', 'COM4')">COM4 orb </button>
         <button id="orbCOM6" onclick="socket.emit('connect orb', 'COM6')">COM6 orb </button>
         <br>

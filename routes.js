@@ -3,6 +3,15 @@ const util = require('./util.js');
 
 
 module.exports = function (app, io) {
+
+    app.get('/foo', function (req, res, next) {
+        res.send('you viewed this page ' + req.session.views['/foo'] + ' times')
+    });
+
+    app.get('/bar', function (req, res, next) {
+        res.send('you viewed this page ' + req.session.views['/bar'] + ' times')
+    });
+
     app.get('/', function(req, res) {
       res.sendFile(__dirname + "/public/views/" + "index.htm");
     });
@@ -14,15 +23,18 @@ module.exports = function (app, io) {
     // routes will go here
     app.get('/orb', function(req, res) {
         let orbId = req.param('port');
-        console.log(req.params);
+        req.session.orb = sphero(orbId);
         res.send(orbId);
     });
+
+    console.log(app);
 
     let orb_serli;
     let orb_chris;
     let heading = 0;
 
     io.on('connection', function(socket){
+        console.log(socket);
         console.log('a user connected');
         socket.on('disconnect', function(){
             console.log('user disconnected');
