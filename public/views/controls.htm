@@ -7,8 +7,8 @@
         <script>
             const socket = io();
         </script>
-        <button id="orbCOM4" onclick="socket.emit('connect orb', 'COM4')">COM4 orb </button>
-        <button id="orbCOM6" onclick="socket.emit('connect orb', 'COM6')">COM6 orb </button>
+        <input id="orbCOM4" value="COM4 ORB" onclick="socket.emit('connect orb', 'COM4'); this.disabled = true; this.value = 'ORB CONNECTED'" />
+        <input id="orbCOM6" value="COM6 ORB" onclick="socket.emit('connect orb', 'COM6'); this.disabled = true; this.value = 'ORB CONNECTED'" />
         <br>
         <br>
         <button onclick="socket.emit('ping orb')">ping orb to verify connection</button>

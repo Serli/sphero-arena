@@ -7,7 +7,6 @@ module.exports = function (app) {
     app.use(bodyParser.json()); // for parsing application/json
     app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
     app.use(express.static(__dirname + '/public'));
-
     app.use(favicon( join(__dirname, './public/icons/favicon.ico')));
 
     app.use(function (req, res, next) {
