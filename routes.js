@@ -3,14 +3,6 @@ const util = require('./util.js');
 
 module.exports = function (app, io) {
 
-    app.get('/foo', function (req, res, next) {
-        res.send('you viewed this page ' + req.session.views['/foo'] + ' times')
-    });
-
-    app.get('/bar', function (req, res, next) {
-        res.send('you viewed this page ' + req.session.views['/bar'] + ' times')
-    });
-
     app.get('/', function(req, res) {
       res.sendFile(__dirname + "/public/views/" + "index.htm");
     });
@@ -22,83 +14,56 @@ module.exports = function (app, io) {
     // routes will go here
     app.get('/orb', function(req, res) {
         let orbId = req.param('port');
-        req.session.orb = sphero(orbId);
-        console.log(req.session);
         res.send(orbId);
     });
 
-    let orb_serli;
-    let orb_chris;
-    let heading = 0;
-
     io.on('connection', function(socket){
-        console.log('TEST0');
-        console.log(socket.handshake.headers);
-        console.log('TEST1');
-        console.log(socket.request.headers.cookie);
-        console.log('TEST2');
-        console.log(socket.handshake);
-        console.log('TEST2');
-        console.log(socket.handshake.session);
+        console.log("Session: ", socket.handshake.session);
         console.log('a user connected');
         socket.on('disconnect', function(){
             console.log('user disconnected');
         });
-        socket.on('chat message', function(msg){
-            console.log('message: ' + msg);
-        });
-        socket.on('message', function(msg){
-            console.log('message: ' + msg);
-        });
         socket.on('connect orb', function(port){
             console.log('connect orb');
             if(port === 'COM4'){
-                orb_serli = sphero(port);
+                let orb_serli = sphero(port);
                 orb_serli.connect(function () {
                     util.orbSetup(orb_serli, 'gold');
                 });
+                socket.handshake.session.orb = orb_serli;
+                socket.handshake.session.heading = 0;
             }
             else if(port === 'COM6'){
-                orb_chris = sphero(port);
+                let orb_chris = sphero(port);
                 orb_chris.connect(function () {
                     util.orbSetup(orb_chris, 'gold');
                 });
+                socket.handshake.session.orb = orb_chris;
+                socket.handshake.session.heading = 0;
             }
         });
         socket.on('ping orb', function(msg){
             console.log('ping orb');
-            if(msg ==='COM4'){
-                orb_serli.ping();
-            }
-            else if(msg ==='COM6'){
-                orb_chris.ping();
-            }
+            socket.handshake.session.orb.ping();
 
         });
         socket.on('go forward', function(){
             console.log('go forward');
-            if(orb_chris && !orb_serli){
-                orb_chris.roll(60, heading);
-            }else if(!orb_chris && orb_serli){
-                orb_serli.roll(60, heading);
-            }else if(orb_chris && orb_serli){
-                orb_chris.roll(60, heading);
-                orb_serli.roll(60, heading);
-            }
+            socket.handshake.session.orb.roll(60, socket.handshake.session.heading);
         });
         socket.on('stop', function(){
             console.log('stop');
-            orb.roll(0);
+            socket.handshake.session.orb.roll(0, socket.handshake.session.heading);
         });
         socket.on('left', function(){
             console.log('left');
-            heading = verifyHeading(heading);
-            orb.roll(1, heading-=20, 2);
+            socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
+            socket.handshake.session.orb.roll(1, socket.handshake.session.heading-=20, 2);
         });
         socket.on('right', function(){
             console.log('right');
-            heading = verifyHeading(heading);
-            orb.roll(1, heading+=20, 2);
+            socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
+            socket.handshake.session.orb.roll(1, socket.handshake.session.heading+=20, 2);
         });
     });
 
