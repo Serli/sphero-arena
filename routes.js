@@ -25,24 +25,13 @@ module.exports = function (app, io) {
         });
         socket.on('connect orb', function(port){
             console.log('connect orb');
-            if(port === 'COM4'){
-                let orb_serli = sphero(port);
-                orb_serli.connect(function () {
-                    util.orbSetup(orb_serli, 'gold');
-                });
-                socket.handshake.session.orb = orb_serli;
-                socket.handshake.session.heading = 0;
-            }
-            else if(port === 'COM6'){
-                let orb_chris = sphero(port);
-                orb_chris.connect(function () {
-                    util.orbSetup(orb_chris, 'gold');
-                });
-                socket.handshake.session.orb = orb_chris;
-                socket.handshake.session.heading = 0;
-            }
+            socket.handshake.session.orb = sphero(port);
+            socket.handshake.session.orb.connect(function () {
+                util.orbSetup(socket.handshake.session.orb, 'gold');
+            });
+            socket.handshake.session.heading = 0;
         });
-        socket.on('ping orb', function(msg){
+        socket.on('ping orb', function(){
             console.log('ping orb');
             socket.handshake.session.orb.ping();
 
