@@ -9,8 +9,9 @@
         </script>
         <button id="orbCOM4" onclick="socket.emit('connect orb', 'COM4')">COM4 orb </button>
         <button id="orbCOM6" onclick="socket.emit('connect orb', 'COM6')">COM6 orb </button>
-        <button onclick="socket.emit('ping orb')">COM4 orb ping </button>
-
+        <br>
+        <br>
+        <button onclick="socket.emit('ping orb')">ping orb to verify connection</button>
 
         <div id="middle-button">
             <input type="button" id="middle" onclick="socket.emit('go forward')"/>
@@ -21,13 +22,11 @@
         <input type="button" id="right" onclick="socket.emit('right')"/>
 
         <div class="arrow-key-container">
-            <div class="arrow-key up" data-key="38"></div><br>
-            <div class="arrow-key left" data-key="37"></div>
-            <div class="arrow-key down" data-key="40"></div>
-            <div class="arrow-key right" data-key="39"></div>
+            <div class="arrow-key up" data-key="38" onclick="socket.emit('go forward')"></div><br>
+            <div class="arrow-key left" data-key="37" onclick="socket.emit('left')"></div>
+            <div class="arrow-key down" data-key="40" onclick="socket.emit('stop')"></div>
+            <div class="arrow-key right" data-key="39" onclick="socket.emit('right')"></div>
         </div>
 
-
-        <p id="demo">Click me</p>
     </body>
 </html>
