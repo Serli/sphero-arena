@@ -9,7 +9,6 @@ util.orbSetup = function (orb, color) {
     orb.setTempOptionFlags(0x08); // Back light always on
     orb.setBackLed(255); // Full intensity
 
-    /*
     let opts = {
         flags: 0x01,
         x: 0x0000,
@@ -18,19 +17,6 @@ util.orbSetup = function (orb, color) {
     };
 
     orb.configureLocator(opts);
-
-    setInterval(function() {
-        orb.readLocator(function(err, data) {
-            if (err) {
-                console.log("error: ", err);
-            } else {
-                console.log(orb.connection.conn, "readLocator:");
-                console.log("  xpos:", data.xpos);
-                console.log("  ypos:", data.ypos);
-            }
-        });
-    }, 1000);
-    */
 };
 
 module.exports = util;

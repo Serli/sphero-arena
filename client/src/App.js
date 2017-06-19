@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+const socket = window.io();
 
 class App extends Component {
+
+    componentDidMount() {
+        console.log(socket.handshake.session);
+        socket.emit('message', 'COUCOU');
+    }
+
   render() {
     return (
       <div className="App">

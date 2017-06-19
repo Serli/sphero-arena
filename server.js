@@ -24,7 +24,7 @@ exports.start = function() {
         });
     });
 
-    server.listen(8010);
+    server.listen(8080);
 };
 
 exports.close = function () {

@@ -23,6 +23,7 @@ module.exports = function (app, io) {
         socket.on('disconnect', function(){
             console.log('user disconnected');
         });
+
         socket.on('connect orb', function(port){
             console.log('connect orb');
             socket.handshake.session.orb = sphero(port);
@@ -30,6 +31,19 @@ module.exports = function (app, io) {
                 util.orbSetup(socket.handshake.session.orb, 'gold');
             });
             socket.handshake.session.heading = 0;
+            setInterval(function() {
+                socket.handshake.session.orb.readLocator(function(err, data) {
+                    if (err) {
+                        console.log("error: ", err);
+                    } else {
+                        console.log( socket.handshake.session.orb.connection.conn, "readLocator:");
+                        console.log("  xpos:", data.xpos);
+                        console.log("  ypos:", data.ypos);
+                        socket.handshake.session.xpos =data.xpos;
+                        socket.handshake.session.ypos =data.ypos;
+                    }
+                });
+            }, 1000);
         });
         socket.on('ping orb', function(){
             console.log('ping orb');
@@ -54,6 +68,16 @@ module.exports = function (app, io) {
             socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
             socket.handshake.session.orb.roll(1, socket.handshake.session.heading+=20, 2);
         });
+/*
+        socket.on('change mode', function(data) {
+            socket.broadcast.to(data).emit('receive change mode', data.mode)
+        });
+
+*/        socket.on('message', function(data) {
+            socket.join(data.room);
+            console.log(data);
+            socket.broadcast.to(data.room).emit('receive message', data);
+        })
     });
 
     // catch-all
@@ -62,6 +86,7 @@ module.exports = function (app, io) {
     app.delete('*', function (req, res) { res.status(404).json({ error:'Invalid DELETE request' });});
 
 };
+
 
 function verifyHeading(heading){
     //Orb can make complete turns

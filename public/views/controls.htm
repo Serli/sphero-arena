@@ -7,6 +7,7 @@
         <script>
             const socket = io();
         </script>
+        <!--
         <input id="orbCOM4" value="COM4 ORB" onclick="socket.emit('connect orb', 'COM4'); this.disabled = true; this.value = 'ORB CONNECTED'" />
         <input id="orbCOM6" value="COM6 ORB" onclick="socket.emit('connect orb', 'COM6'); this.disabled = true; this.value = 'ORB CONNECTED'" />
         <br>
@@ -27,6 +28,16 @@
             <div class="arrow-key down" data-key="40" onclick="socket.emit('stop')"></div>
             <div class="arrow-key right" data-key="39" onclick="socket.emit('right')"></div>
         </div>
+        -->
+        <input id="orbCOM4" value="COM4 ORB" onclick="socket.emit('connect orb', 'COM4'); this.disabled = true; this.value = 'ORB CONNECTED'" />
+
+        <input type="button" id="left"  onclick="socket.emit('left')"/>
+        <input type="button" id="pause" onclick="socket.emit('message', 'hello world!')"/>
+        <input type="button" id="right" onclick="socket.emit('right')"/>
+
+        <div id="root"></div>
+        <div id="basic"></div>
+        <script src="http://localhost:3000/static/js/bundle.js"></script>
 
     </body>
 </html>
