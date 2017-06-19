@@ -72,12 +72,10 @@ module.exports = function (app, io) {
         socket.on('change mode', function(data) {
             socket.broadcast.to(data).emit('receive change mode', data.mode)
         });
+        */
 
-*/        socket.on('message', function(data) {
-            socket.join(data.room);
-            console.log(data);
-            socket.broadcast.to(data.room).emit('receive message', data);
-        })
+
+
     });
 
     // catch-all
