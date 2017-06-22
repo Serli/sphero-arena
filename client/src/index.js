@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-//import Basic from './basic';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Toggle} from "./toggle";
-import LeftArrow from "./LeftArrow";
+import Arrows from "./Arrows";
+import OrbsConnect from "./OrbsConnect";
+import io from 'socket.io-client';
+
+let socket = io('http://localhost:8080');
+
+let props = { title: 'Universal React', socket:socket};
 
 ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<Toggle />, document.getElementById('toggle'));
-ReactDOM.render(<LeftArrow />, document.getElementById('leftArrow'));
-//ReactDOM.render(<Basic />, document.getElementById('basic'));
+ReactDOM.render(React.createElement(Arrows, props), document.getElementById('arrows'));
+ReactDOM.render(React.createElement(OrbsConnect, props), document.getElementById('orbsConnect'));
