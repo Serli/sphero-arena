@@ -21,9 +21,19 @@ module.exports = function (app, io) {
                     if (err) {
                         console.log("error: ", err);
                     } else {
-                        console.log( socket.handshake.session.orb.connection.conn, "readLocator:");
+                        console.log(socket.handshake.session.orb.connection.conn, "readLocator:");
                         console.log("  xpos:", data.xpos);
                         console.log("  ypos:", data.ypos);
+
+                        if(socket.handshake.session.orb.connection.conn === 'COM4'){
+                            io.emit('xposCOM4', data.xpos);
+                            io.emit('yposCOM4', data.ypos);
+                        }
+                        if(socket.handshake.session.orb.connection.conn === 'COM6'){
+                            io.emit('xposCOM6', data.xpos);
+                            io.emit('yposCOM6', data.ypos);
+                        }
+
                         socket.handshake.session.xpos =data.xpos;
                         socket.handshake.session.ypos =data.ypos;
                     }
