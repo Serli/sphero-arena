@@ -4,12 +4,14 @@ class OrbsConnect extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true};
-        // This binding is necessary to make `this` work in the callback
-        this.handleClick = this.handleClick.bind(this);
+        this.state = {isToggleOff: false};
+
         props.socket.on('test', function (msg) {
             console.log('hello world!', msg);
         });
+
+        // This binding is necessary to make `this` work in the callback
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -17,14 +19,16 @@ class OrbsConnect extends Component {
     }
 
     handleClick(){
-        this.props.socket.emit('test', 'Hello world!');
+        this.props.socket.emit('connect orb', 'COM4');
+        this.setState({
+            isToggleOff: true
+        })
     }
 
     render() {
         return (
             <div>
-                <input id="orbCOM4" value="COM4 ORB" />
-                <p onClick={this.handleClick}>props : {this.props.title}</p>
+                <input onClick={this.handleClick} id="orbCOM4" value="COM4 ORB" disabled={this.state.isToggleOff}/>
             </div>
         );
     }
