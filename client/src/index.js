@@ -10,7 +10,7 @@ import FloorPlan from "./FloorPlan";
 
 let socket = io('http://192.168.86.134:8080');
 
-let props = { title: 'Universal React', socket:socket};
+let props = {socket:socket};
 
 ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(React.createElement(Arrows, props), document.getElementById('arrows'));
