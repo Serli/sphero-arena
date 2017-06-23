@@ -7,19 +7,17 @@ class OrbsConnect extends Component {
         this.state = {isToggleOn: true};
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
-        props.socket.io.on('message', function (msg) {
-            console.log('hello world!');
+        props.socket.on('test', function (msg) {
+            console.log('hello world!', msg);
         });
     }
 
     componentDidMount() {
-        console.log('connected');
-        //let socket = this.props.socket();
-        console.log(this.props.socket);
+
     }
 
     handleClick(){
-        this.props.socket.io.emit('message', 'Hello world!');
+        this.props.socket.emit('test', 'Hello world!');
     }
 
     render() {

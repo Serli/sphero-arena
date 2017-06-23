@@ -3,27 +3,12 @@ const util = require('./util.js');
 
 module.exports = function (app, io) {
 
-    app.get('/', function(req, res) {
-      res.sendFile(__dirname + "/public/views/" + "index.htm");
-    });
-
-    app.get('/controls', function(req, res) {
-        res.sendFile(__dirname + "/public/views/" + "controls.htm");
-    });
-
-    // routes will go here
-    app.get('/orb', function(req, res) {
-        let orbId = req.param('port');
-        res.send(orbId);
-    });
-
     io.on('connection', function(socket){
         console.log("Session: ", socket.handshake.session);
         console.log('a user connected');
         socket.on('disconnect', function(){
             console.log('user disconnected');
         });
-
         socket.on('connect orb', function(port){
             console.log('connect orb');
             socket.handshake.session.orb = sphero(port);
@@ -68,11 +53,12 @@ module.exports = function (app, io) {
             socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
             socket.handshake.session.orb.roll(1, socket.handshake.session.heading+=20, 2);
         });
-/*
-        socket.on('change mode', function(data) {
-            socket.broadcast.to(data).emit('receive change mode', data.mode)
+
+        socket.on('test', function(data) {
+            console.log(data);
+            io.emit('test','message');
         });
-        */
+
 
 
 

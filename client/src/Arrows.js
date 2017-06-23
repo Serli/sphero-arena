@@ -19,19 +19,19 @@ class Arrows extends Component {
     }
 
     handleClickUp() {
-        this.props.socket.io.emit('go forward');
+        this.props.socket.emit('go forward');
     }
 
     handleClickLeft() {
-        this.props.socket.io.emit('left');
+        this.props.socket.emit('left');
     }
 
     handleClickDown() {
-        this.props.socket.io.emit('stop');
+        this.props.socket.emit('stop');
     }
 
     handleClickRight() {
-        this.props.socket.io.emit('right');
+        this.props.socket.emit('right');
     }
 
     render() {
