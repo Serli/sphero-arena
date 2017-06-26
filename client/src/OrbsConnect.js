@@ -5,6 +5,8 @@ class OrbsConnect extends Component {
     constructor(props) {
         super(props);
         this.state = {isToggleOffCOM6: false, isToggleOffCOM4: false, styleCOM4: '', styleCOM6:''};
+        //socket on disable after connection
+        //pass socket sockets en ES6
         // This binding is necessary to make `this` work in the callback
         this.handleClickCOM4 = this.handleClickCOM4.bind(this);
         this.handleClickCOM6 = this.handleClickCOM6.bind(this);

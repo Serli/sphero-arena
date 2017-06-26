@@ -3,13 +3,13 @@ const util = require('./util.js');
 
 module.exports = function (app, io) {
 
-    io.on('connection', function(socket){
+    io.on('connection',  (socket) => {
         console.log("Session: ", socket.handshake.session);
         console.log('a user connected');
-        socket.on('disconnect', function(){
-            console.log('user disconnected');
-        });
-        socket.on('connect orb', function(port){
+
+        socket.on('disconnect', () => console.log('user disconnected'));
+
+        socket.on('connect orb',  (port) => {
             console.log('connect orb');
             socket.handshake.session.orb = sphero(port);
             socket.handshake.session.orb.connect(function () {
@@ -40,37 +40,29 @@ module.exports = function (app, io) {
                 });
             }, 1000);
         });
-        socket.on('ping orb', function(){
+        socket.on('ping orb', () => {
             console.log('ping orb');
             socket.handshake.session.orb.ping();
-
         });
-        socket.on('go forward', function(){
+
+        socket.on('go forward',  () => {
             console.log('go forward');
             socket.handshake.session.orb.roll(60, socket.handshake.session.heading);
         });
-        socket.on('stop', function(){
+        socket.on('stop',  () => {
             console.log('stop');
             socket.handshake.session.orb.roll(0, socket.handshake.session.heading);
         });
-        socket.on('left', function(){
+        socket.on('left',  () => {
             console.log('left');
             socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
             socket.handshake.session.orb.roll(1, socket.handshake.session.heading-=20, 2);
         });
-        socket.on('right', function(){
+        socket.on('right',  () => {
             console.log('right');
             socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
             socket.handshake.session.orb.roll(1, socket.handshake.session.heading+=20, 2);
         });
-
-        socket.on('test', function(data) {
-            console.log(data);
-            io.emit('test','message');
-        });
-
-
-
 
     });
 
