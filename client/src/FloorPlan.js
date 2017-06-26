@@ -6,6 +6,8 @@ class FloorPlan extends Component {
         super(props);
         this.state = {xposCOM4: '0', yposCOM4:'0', xposCOM6:'0', yposCOM6:'0'};
         this.text = 'Salut';
+        this.x=0;
+        this.y=0;
         props.socket.on('xposCOM4', (data) => this.updateXCOM4InState(data));
         props.socket.on('yposCOM4', (data) => this.updateYCOM4InState(data));
         props.socket.on('xposCOM6', (data) => this.updateXCOM6InState(data));
@@ -37,18 +39,27 @@ class FloorPlan extends Component {
     }
 
     componentDidMount(){
-        this.interval = setInterval(() => this.tick(), 1000/60);
+        this.draw();
     }
 
-    tick() {
-        let canvas = this.refs.p1;
-        let ctx = canvas.getContext("2d");
-        ctx.fillStyle = "black";
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    draw = () => {
+        const ctx = this.canvasRef.getContext("2d");
+        this.x = this.x + 2;
+        this.y = this.y + 4;
+        if (this.y > this.canvasRef.height) {
+            this.x = 0;
+            this.y = 0;
+        }
+        ctx.clearRect(0, 0, this.canvasRef.width, this.canvasRef.height);
+        ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
         ctx.font = "30px Arial";
-        ctx.fillText(this.text,10,50);
-    }
-
+        ctx.fillText(this.state.xposCOM4,10,50);
+        ctx.fillText(this.state.yposCOM4,10,100);
+        ctx.fillText(this.state.xposCOM6,10,150);
+        ctx.fillText(this.state.yposCOM6,10,200);
+        ctx.fillRect(10,10,1,1);
+        setTimeout(this.draw, 100);
+    };
 
     render() {
         return(
@@ -57,9 +68,7 @@ class FloorPlan extends Component {
                 <p>posyCOM4 : {this.state.yposCOM4}</p>
                 <p>posxCOM6 : {this.state.xposCOM6}</p>
                 <p>posyCOM6 : {this.state.yposCOM6}</p>
-                <canvas id="myCanvas" width="200" height="100" style={{border:'1px solid #000000'}} ref="p1">
-                    Your browser does not support the HTML5 canvas tag.
-                </canvas>
+                <canvas width="500" height="500" ref={ref => this.canvasRef = ref} />
             </div>
         )
     }
