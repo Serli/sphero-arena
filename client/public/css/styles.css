@@ -29,16 +29,22 @@
 .arrow-key.up:before {
      content: "\2191";
  }
-.arrow-key.down:before {
-     content: "\2193";
- }
 
 .arrow-key.right:before {
      content: "\2192";
- }
+}
 
 .arrow-key:active {
     box-shadow: 0px 0px 0 #999, 0px 0px 0 #999, 0px 0px 0 #999, -1px 1px 0 #999;
     transform: translate3d(-3px, 3px, 0);
 }
 
+#shoot{
+    width: 90px;
+    height: 90px;
+    background-color: white;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 50%;
+}

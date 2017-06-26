@@ -33,7 +33,9 @@ class Arrows extends Component {
             <div className="arrow-key-container">
                 <div className="arrow-key up" data-key="38" onClick={this.handleClickUp}></div><br/>
                 <div className="arrow-key left" data-key="37" onClick={this.handleClickLeft}></div>
-                <div className="arrow-key down" data-key="40" onClick={this.handleClickDown}></div>
+                <div className="arrow-key down" data-key="40" onClick={this.handleClickDown}>
+                    <i className="glyphicon glyphicon-pause"></i>
+                </div>
                 <div className="arrow-key right" data-key="39" onClick={this.handleClickRight}></div>
             </div>
         )

@@ -5,6 +5,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Arrows from "./Arrows";
 import OrbsConnect from "./OrbsConnect";
+import Shoot from "./Shoot";
 import io from 'socket.io-client';
 import FloorPlan from "./FloorPlan";
 
@@ -16,3 +17,4 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(React.createElement(Arrows, props), document.getElementById('arrows'));
 ReactDOM.render(React.createElement(OrbsConnect, props), document.getElementById('orbsConnect'));
 ReactDOM.render(React.createElement(FloorPlan, props), document.getElementById('floorPlan'));
+ReactDOM.render(React.createElement(Shoot, props), document.getElementById('shoot'));
