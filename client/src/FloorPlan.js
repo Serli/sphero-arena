@@ -5,6 +5,7 @@ class FloorPlan extends Component {
     constructor(props){
         super(props);
         this.state = {xposCOM4: '0', yposCOM4:'0', xposCOM6:'0', yposCOM6:'0'};
+        this.text = 'Salut';
         props.socket.on('xposCOM4', (data) => this.updateXCOM4InState(data));
         props.socket.on('yposCOM4', (data) => this.updateYCOM4InState(data));
         props.socket.on('xposCOM6', (data) => this.updateXCOM6InState(data));
@@ -35,6 +36,20 @@ class FloorPlan extends Component {
         })
     }
 
+    componentDidMount(){
+        this.interval = setInterval(() => this.tick(), 1000/60);
+    }
+
+    tick() {
+        let canvas = this.refs.p1;
+        let ctx = canvas.getContext("2d");
+        ctx.fillStyle = "black";
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.font = "30px Arial";
+        ctx.fillText(this.text,10,50);
+    }
+
+
     render() {
         return(
             <div>
@@ -42,6 +57,9 @@ class FloorPlan extends Component {
                 <p>posyCOM4 : {this.state.yposCOM4}</p>
                 <p>posxCOM6 : {this.state.xposCOM6}</p>
                 <p>posyCOM6 : {this.state.yposCOM6}</p>
+                <canvas id="myCanvas" width="200" height="100" style={{border:'1px solid #000000'}} ref="p1">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
             </div>
         )
     }
