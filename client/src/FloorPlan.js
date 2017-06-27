@@ -57,12 +57,24 @@ class FloorPlan extends Component {
         ctx.fillText(this.state.yposCOM4,10,100);
         ctx.fillText(this.state.xposCOM6,10,150);
         ctx.fillText(this.state.yposCOM6,10,200);
-        ctx.fillRect(250,250,9,9);
+        ctx.beginPath();
+        ctx.arc(250, 250, 20, 0, 2 * Math.PI, false);
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#d5d5d5';
+        ctx.stroke();
         ctx.beginPath();
         ctx.moveTo(250,250);
         ctx.lineTo(250-parseInt(this.state.xposCOM4, 10), 250-parseInt(this.state.yposCOM4, 10));
         ctx.stroke();
-        ctx.fillRect(750,250,9,9);
+        ctx.beginPath();
+        ctx.arc(750, 250, 20, 0, 2 * Math.PI, false);
+        ctx.fillStyle = 'yellow';
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#d5d5d5';
+        ctx.stroke();
         setTimeout(this.draw, 100);
     };
 
