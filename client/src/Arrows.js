@@ -27,10 +27,11 @@ class Arrows extends Component {
     }
 
     handleClickRight() {
+        let socket = this.props.socket;
         this.var = setInterval(function () {
-            //this.props.socket.emit('right');
+            socket.emit('right');
             console.log('TEST');
-        }, 100);
+        }, 500);
     }
 
     handleChange() {
