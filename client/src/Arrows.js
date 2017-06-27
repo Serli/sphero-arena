@@ -4,11 +4,14 @@ import React, { Component } from 'react';
 class Arrows extends Component {
     constructor(props){
         super(props);
+        this.state = {value: ''};
         // This binding is necessary to make `this` work in the callback
         this.handleClickUp = this.handleClickUp.bind(this);
         this.handleClickLeft = this.handleClickLeft.bind(this);
         this.handleClickDown = this.handleClickDown.bind(this);
         this.handleClickRight = this.handleClickRight.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.var;
     }
 
     handleClickUp() {
@@ -24,7 +27,14 @@ class Arrows extends Component {
     }
 
     handleClickRight() {
-        this.props.socket.emit('right');
+        this.var = setInterval(function () {
+            //this.props.socket.emit('right');
+            console.log('TEST');
+        }, 100);
+    }
+
+    handleChange() {
+        clearInterval(this.var);
     }
 
     render() {
@@ -36,7 +46,7 @@ class Arrows extends Component {
                 <div className="arrow-key down" data-key="40" onClick={this.handleClickDown}>
                     <i className="glyphicon glyphicon-pause"></i>
                 </div>
-                <div className="arrow-key right" data-key="39" onClick={this.handleClickRight}></div>
+                <div className="arrow-key right" data-key="39" onMouseDown={this.handleClickRight} onMouseUp={this.handleChange}></div>
             </div>
         )
     }
