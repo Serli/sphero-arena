@@ -9,11 +9,11 @@ module.exports = function (app, io) {
 
         socket.on('disconnect', () => console.log('user disconnected'));
 
-        socket.on('connect orb',  (port) => {
+        socket.on('connect orb',  (data) => {
             console.log('connect orb');
-            socket.handshake.session.orb = sphero(port);
+            socket.handshake.session.orb = sphero(data.port);
             socket.handshake.session.orb.connect(function () {
-                util.orbSetup(socket.handshake.session.orb, 'gold');
+                util.orbSetup(socket.handshake.session.orb, data.color);
             });
             socket.handshake.session.heading = 0;
             setInterval(function() {

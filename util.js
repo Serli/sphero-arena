@@ -1,13 +1,14 @@
 const util = {};
 
 util.orbSetup = function (orb, color) {
-    orb.on("error", function(err, data) {
+    orb.on("error", function(err) {
         if (err) { console.log("ERREUR", err); }
     });
     orb.ping();
     orb.color(color);
     orb.setTempOptionFlags(0x08); // Back light always on
     orb.setBackLed(255); // Full intensity
+    orb.setHeading(0);
 
     let opts = {
         flags: 0x01,
