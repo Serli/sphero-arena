@@ -57,7 +57,12 @@ class FloorPlan extends Component {
         ctx.fillText(this.state.yposCOM4,10,100);
         ctx.fillText(this.state.xposCOM6,10,150);
         ctx.fillText(this.state.yposCOM6,10,200);
-        ctx.fillRect(10,10,1,1);
+        ctx.fillRect(250,250,9,9);
+        ctx.beginPath();
+        ctx.moveTo(250,250);
+        ctx.lineTo(250-parseInt(this.state.xposCOM4, 10), 250-parseInt(this.state.yposCOM4, 10));
+        ctx.stroke();
+        ctx.fillRect(750,250,9,9);
         setTimeout(this.draw, 100);
     };
 
@@ -68,7 +73,7 @@ class FloorPlan extends Component {
                 <p>posyCOM4 : {this.state.yposCOM4}</p>
                 <p>posxCOM6 : {this.state.xposCOM6}</p>
                 <p>posyCOM6 : {this.state.yposCOM6}</p>
-                <canvas width="500" height="500" ref={ref => this.canvasRef = ref} />
+                <canvas style={{border: "1px solid #000000"}} width="1000" height="500" ref={ref => this.canvasRef = ref} />
             </div>
         )
     }
