@@ -5,7 +5,6 @@ class Shoot extends Component {
     constructor(props){
         super(props);
         this.state = {shootPos: ''};
-        props.socket.on('shoot received', (data) => this.updateShoot(data));
 
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
@@ -13,12 +12,6 @@ class Shoot extends Component {
 
     handleClick() {
         this.props.socket.emit('shoot');
-    }
-
-    updateShoot(data) {
-        this.setState({
-            shootPos: data
-        })
     }
 
     render() {

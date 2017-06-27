@@ -4,14 +4,15 @@ import React, { Component } from 'react';
 class FloorPlan extends Component {
     constructor(props){
         super(props);
-        this.state = {xposCOM4: '0', yposCOM4:'0', xposCOM6:'0', yposCOM6:'0'};
-        this.text = 'Salut';
+        this.state = {xposCOM4: '0', yposCOM4:'0', xposCOM6:'0', yposCOM6:'0', shootPosX: '0', shootPosY:'0'};
         this.x=0;
         this.y=0;
         props.socket.on('xposCOM4', (data) => this.updateXCOM4InState(data));
         props.socket.on('yposCOM4', (data) => this.updateYCOM4InState(data));
         props.socket.on('xposCOM6', (data) => this.updateXCOM6InState(data));
         props.socket.on('yposCOM6', (data) => this.updateYCOM6InState(data));
+        props.socket.on('shoot', (data) => this.updateShoot(data));
+
     }
 
     updateXCOM4InState(data) {
@@ -36,6 +37,10 @@ class FloorPlan extends Component {
         this.setState({
             yposCOM6: data
         })
+    }
+
+    updateShoot(data) {
+
     }
 
     componentDidMount(){
@@ -76,6 +81,11 @@ class FloorPlan extends Component {
         ctx.strokeStyle = '#d5d5d5';
         ctx.stroke();
         setTimeout(this.draw, 100);
+
+        ctx.beginPath();
+        ctx.moveTo(parseInt(this.state.xposCOM4, 10), parseInt(this.state.xposCOM4, 10));
+        ctx.lineTo(20+parseInt(this.state.xposCOM4, 10), 20+parseInt(this.state.yposCOM4, 10));
+        ctx.stroke();
     };
 
     render() {
