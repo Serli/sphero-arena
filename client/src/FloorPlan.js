@@ -76,15 +76,15 @@ class FloorPlan extends Component {
         ctx.strokeStyle = '#d5d5d5';
         ctx.stroke();
 
-        //COM4 path drawing
+        //COM4 path drawing line of orb movement
         ctx.beginPath();
         ctx.moveTo(250,250);
         ctx.lineTo( 250 + parseInt(this.state.yposCOM4, 10), 250 +parseInt(this.state.xposCOM4, 10));
         ctx.stroke();
 
-        //COM6 Yellow orb
+        //COM6 path drawing orb moving on canvas
         ctx.beginPath();
-        ctx.arc(750, 250, 20, 0, 2 * Math.PI, false);
+        ctx.arc(750 - parseInt(this.state.yposCOM6, 10), 250 + parseInt(this.state.xposCOM6, 10), 20, 0, 2 * Math.PI, false);
         ctx.fillStyle = 'yellow';
         ctx.fill();
         ctx.lineWidth = 3;
