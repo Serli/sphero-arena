@@ -17,7 +17,7 @@ class OrbsConnect extends Component {
     }
 
     handleClickCOM4(){
-        this.props.socket.emit('connect orb', {port: 'COM4', color: 'blue'});
+        this.props.socket.emit('connect orb', {port: 'COM4', color: 'green'});
         this.setState({
             isToggleOffCOM4: true,
             styleCOM4:'grey'

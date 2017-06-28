@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 class FloorPlan extends Component {
     constructor(props){
         super(props);
-        this.state = {xposCOM4: '0', yposCOM4:'0', xposCOM6:'0', yposCOM6:'0', shootPosX: '0', shootPosY:'0'};
+        this.state = {xposCOM4: '0', yposCOM4:'0', xposCOM6:'0', yposCOM6:'0', shootPosX: '0', shootPosY:'0', shot: false};
         this.x=0;
         this.y=0;
-        this.var = '0';
+        this.increment = 0;
         props.socket.on('xposCOM4', (data) => this.updateXCOM4InState(data));
         props.socket.on('yposCOM4', (data) => this.updateYCOM4InState(data));
         props.socket.on('xposCOM6', (data) => this.updateXCOM6InState(data));
@@ -41,7 +41,11 @@ class FloorPlan extends Component {
     }
 
     updateShoot(data) {
+        //need to pass which orb shot
         console.log('someone shoot');
+        this.setState({
+            shot: true
+        })
     }
 
     componentDidMount(){
@@ -50,12 +54,6 @@ class FloorPlan extends Component {
 
     draw = () => {
         const ctx = this.canvasRef.getContext("2d");
-        this.x = this.x + 2;
-        this.y = this.y + 4;
-        if (this.y > this.canvasRef.height) {
-            this.x = 0;
-            this.y = 0;
-        }
 
         //draw X and Y pos of orbs
         ctx.clearRect(0, 0, this.canvasRef.width, this.canvasRef.height);
@@ -66,23 +64,25 @@ class FloorPlan extends Component {
         ctx.fillText(this.state.xposCOM6,10,150);
         ctx.fillText(this.state.yposCOM6,10,200);
 
-        this.var = parseInt(this.var, 10) + 2;
-        ctx.fillText(this.var,10,250);
+        ctx.fillText(this.increment,10,250);
 
-        //COM4 Blue orb
+
+        //COM4 Green orb
         ctx.beginPath();
         ctx.arc(250, 250, 20, 0, 2 * Math.PI, false);
-        ctx.fillStyle = 'blue';
+        ctx.fillStyle = 'green';
         ctx.fill();
         ctx.lineWidth = 3;
         ctx.strokeStyle = '#d5d5d5';
         ctx.stroke();
 
-        //COM6 yellow orb
+        //COM4 path drawing
         ctx.beginPath();
         ctx.moveTo(250,250);
-        ctx.lineTo(250-parseInt(this.state.xposCOM4, 10), 250-parseInt(this.state.yposCOM4, 10));
+        ctx.lineTo( 250 + parseInt(this.state.yposCOM4, 10), 250 +parseInt(this.state.xposCOM4, 10));
         ctx.stroke();
+
+        //COM6 Yellow orb
         ctx.beginPath();
         ctx.arc(750, 250, 20, 0, 2 * Math.PI, false);
         ctx.fillStyle = 'yellow';
@@ -91,11 +91,29 @@ class FloorPlan extends Component {
         ctx.strokeStyle = '#d5d5d5';
         ctx.stroke();
 
+        console.log(this.state.shot);
+
         //shoot
-        ctx.beginPath();
-        ctx.moveTo(parseInt(this.var, 10) + parseInt(this.state.xposCOM4, 10), parseInt(this.var, 10) + parseInt(this.state.xposCOM4, 10));
-        ctx.lineTo(parseInt(this.var, 10) + 20+parseInt(this.state.xposCOM4, 10), parseInt(this.var, 10)+ 20+parseInt(this.state.yposCOM4, 10));
-        ctx.stroke();
+        if(this.state.shot){
+            if(this.increment < this.canvasRef.width-250){
+                this.increment+=10;
+                ctx.beginPath();
+                /*
+                ctx.moveTo(this.increment + parseInt(this.state.xposCOM4, 10), this.increment + parseInt(this.state.xposCOM4, 10));
+                ctx.lineTo(this.increment + 20+parseInt(this.state.xposCOM4, 10), this.increment + 20+parseInt(this.state.yposCOM4, 10));
+                */
+                ctx.moveTo(this.increment+250, 250);
+                ctx.lineTo(this.increment + 300, 250);
+
+                ctx.stroke();
+            }else{
+                this.setState({
+                    shot: false,
+                });
+                this.increment = 0;
+            }
+        }
+
         setTimeout(this.draw, 100);
     };
 
