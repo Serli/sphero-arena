@@ -7,6 +7,7 @@ class FloorPlan extends Component {
         this.state = {xposCOM4: '0', yposCOM4:'0', xposCOM6:'0', yposCOM6:'0', shootPosX: '0', shootPosY:'0'};
         this.x=0;
         this.y=0;
+        this.var = '0';
         props.socket.on('xposCOM4', (data) => this.updateXCOM4InState(data));
         props.socket.on('yposCOM4', (data) => this.updateYCOM4InState(data));
         props.socket.on('xposCOM6', (data) => this.updateXCOM6InState(data));
@@ -55,6 +56,8 @@ class FloorPlan extends Component {
             this.x = 0;
             this.y = 0;
         }
+
+        //draw X and Y pos of orbs
         ctx.clearRect(0, 0, this.canvasRef.width, this.canvasRef.height);
         ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
         ctx.font = "30px Arial";
@@ -62,6 +65,11 @@ class FloorPlan extends Component {
         ctx.fillText(this.state.yposCOM4,10,100);
         ctx.fillText(this.state.xposCOM6,10,150);
         ctx.fillText(this.state.yposCOM6,10,200);
+
+        this.var = parseInt(this.var, 10) + 2;
+        ctx.fillText(this.var,10,250);
+
+        //COM4 Blue orb
         ctx.beginPath();
         ctx.arc(250, 250, 20, 0, 2 * Math.PI, false);
         ctx.fillStyle = 'blue';
@@ -69,6 +77,8 @@ class FloorPlan extends Component {
         ctx.lineWidth = 3;
         ctx.strokeStyle = '#d5d5d5';
         ctx.stroke();
+
+        //COM6 yellow orb
         ctx.beginPath();
         ctx.moveTo(250,250);
         ctx.lineTo(250-parseInt(this.state.xposCOM4, 10), 250-parseInt(this.state.yposCOM4, 10));
@@ -80,12 +90,13 @@ class FloorPlan extends Component {
         ctx.lineWidth = 3;
         ctx.strokeStyle = '#d5d5d5';
         ctx.stroke();
-        setTimeout(this.draw, 100);
 
+        //shoot
         ctx.beginPath();
-        ctx.moveTo(parseInt(this.state.xposCOM4, 10), parseInt(this.state.xposCOM4, 10));
-        ctx.lineTo(20+parseInt(this.state.xposCOM4, 10), 20+parseInt(this.state.yposCOM4, 10));
+        ctx.moveTo(parseInt(this.var, 10) + parseInt(this.state.xposCOM4, 10), parseInt(this.var, 10) + parseInt(this.state.xposCOM4, 10));
+        ctx.lineTo(parseInt(this.var, 10) + 20+parseInt(this.state.xposCOM4, 10), parseInt(this.var, 10)+ 20+parseInt(this.state.yposCOM4, 10));
         ctx.stroke();
+        setTimeout(this.draw, 100);
     };
 
     render() {
