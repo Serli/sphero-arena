@@ -64,6 +64,11 @@ module.exports = function (app, io) {
             socket.handshake.session.orb.roll(1, socket.handshake.session.heading+=20, 2);
         });
 
+        socket.on('shoot',  () => {
+            console.log('shoot');
+            io.emit('shoot received');
+        });
+
     });
 
     // catch-all

@@ -12,7 +12,7 @@ class FloorPlan extends Component {
         props.socket.on('yposCOM4', (data) => this.updateYCOM4InState(data));
         props.socket.on('xposCOM6', (data) => this.updateXCOM6InState(data));
         props.socket.on('yposCOM6', (data) => this.updateYCOM6InState(data));
-        props.socket.on('shoot', (data) => this.updateShoot(data));
+        props.socket.on('shoot received', (data) => this.updateShoot(data));
 
     }
 
@@ -41,7 +41,7 @@ class FloorPlan extends Component {
     }
 
     updateShoot(data) {
-
+        console.log('someone shoot');
     }
 
     componentDidMount(){
