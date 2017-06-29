@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
+import './Joystick2.css';
 
 
-const styles = {
-    height: "100px",
-    backgroundColor: "blue",
-};
 
 class Joystick2 extends Component {
     constructor(props) {
         super(props);
     }
 
-    componentDidMount = () => {
+    componentDidMount(){
+        let socket = this.props.socket;
         const joystickParams = {
             zone: document.getElementById("joystick2"),
             color: "blue",
@@ -19,14 +17,12 @@ class Joystick2 extends Component {
         const manager = require('nipplejs').create(joystickParams);
         manager.on('added', function(evt, nipple) {
             console.log("added");
-            nipple.on('move', function(evt) {
-                console.log("moved");
-            });
+            socket.emit('shoot');
         });
     };
 
     render() {
-        return(<div style={styles} />);
+        return(<div />);
     }
 }
 

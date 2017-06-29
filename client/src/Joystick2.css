@@ -1,0 +1,9 @@
+#joystick2 > .nipple > .front{
+    opacity:0 !important
+}
+
+#joystick2{
+    border:1px solid black;
+    background-color: #adadad;
+    height: 120px;
+}

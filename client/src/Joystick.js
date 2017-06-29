@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-
-
-const styles = {
-    height: "100px",
-};
+import './Joystick.css';
 
 class Joystick extends Component {
     constructor(props) {
@@ -25,7 +21,7 @@ class Joystick extends Component {
     };
 
     render() {
-        return(<div style={styles} />);
+        return(<div />);
     }
 }
 
