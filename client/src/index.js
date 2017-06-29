@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Arrows from "./Arrows";
 import OrbsConnect from "./OrbsConnect";
 import Shoot from "./Shoot";
+import Joystick from "./Joystick";
 import io from 'socket.io-client';
 import FloorPlan from "./FloorPlan";
 
@@ -16,3 +17,4 @@ ReactDOM.render(React.createElement(Arrows, props), document.getElementById('arr
 ReactDOM.render(React.createElement(OrbsConnect, props), document.getElementById('orbsConnect'));
 ReactDOM.render(React.createElement(FloorPlan, props), document.getElementById('floorPlan'));
 ReactDOM.render(React.createElement(Shoot, props), document.getElementById('shoot'));
+ReactDOM.render(React.createElement(Joystick, props), document.getElementById('joystick'));
