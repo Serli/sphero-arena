@@ -3,17 +3,18 @@ import React, { Component } from 'react';
 
 const styles = {
     height: "100px",
+    backgroundColor: "blue",
 };
 
-class Joystick extends Component {
+class Joystick2 extends Component {
     constructor(props) {
         super(props);
     }
 
     componentDidMount = () => {
         const joystickParams = {
-            zone: document.getElementById("joystick"),
-            color: "red",
+            zone: document.getElementById("joystick2"),
+            color: "blue",
         };
         const manager = require('nipplejs').create(joystickParams);
         manager.on('added', function(evt, nipple) {
@@ -29,4 +30,4 @@ class Joystick extends Component {
     }
 }
 
-export default Joystick;
+export default Joystick2;

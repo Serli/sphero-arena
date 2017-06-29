@@ -6,6 +6,7 @@ import Arrows from "./Arrows";
 import OrbsConnect from "./OrbsConnect";
 import Shoot from "./Shoot";
 import Joystick from "./Joystick";
+import Joystick2 from "./Joystick2";
 import io from 'socket.io-client';
 import FloorPlan from "./FloorPlan";
 
@@ -18,3 +19,4 @@ ReactDOM.render(React.createElement(OrbsConnect, props), document.getElementById
 ReactDOM.render(React.createElement(FloorPlan, props), document.getElementById('floorPlan'));
 ReactDOM.render(React.createElement(Shoot, props), document.getElementById('shoot'));
 ReactDOM.render(React.createElement(Joystick, props), document.getElementById('joystick'));
+ReactDOM.render(React.createElement(Joystick2, props), document.getElementById('joystick2'));
