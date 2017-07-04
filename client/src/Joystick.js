@@ -22,9 +22,19 @@ class Joystick extends Component {
                     clearInterval(this.var);
                     this.var = setInterval(function () {
                         console.log('up');
-                        socket.emit('turn', 180);
+                        socket.emit('turn', (-data.angle.degree % 360 + 360) % 360);
                     }, 400);
-                }else if (data.angle.degree > 0 && data.angle.degree < 67.5){
+                }else if (data.angle.degree > 240 && data.angle.degree < 290){
+                    clearInterval(this.var);
+                    this.var = setInterval(function () {
+                        console.log('down');
+                        socket.emit('turn', data.angle.degree);
+                    }, 400);
+                }
+
+                /*
+
+                else if (data.angle.degree > 0 && data.angle.degree < 67.5){
                     clearInterval(this.var);
                     this.var = setInterval(function () {
                         console.log('right-up');
@@ -57,6 +67,7 @@ class Joystick extends Component {
                         socket.emit('turn', 315);
                     }, 400);
                 }
+                */
             });
             nipple.on('end', function(evt) {
                 console.log("end");
