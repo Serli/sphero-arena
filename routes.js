@@ -75,6 +75,11 @@ module.exports = function (app, io) {
             io.emit('shoot received');
         });
 
+        socket.on('turn',  (heading) => {
+            socket.handshake.session.heading = heading;
+            socket.handshake.session.orb.roll(60, heading);
+        });
+
     });
 
     // catch-all
@@ -92,6 +97,13 @@ function verifyHeading(heading){
     }else if (heading <= 0) {
         heading = 340;
     }
+
+    return heading;
+}
+
+function normalize(heading){
+    //Orb can make complete turns
+    heading+=110;
 
     return heading;
 }
