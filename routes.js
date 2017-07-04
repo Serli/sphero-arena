@@ -24,6 +24,7 @@ module.exports = function (app, io) {
                         console.log(socket.handshake.session.orb.connection.conn, "readLocator:");
                         console.log("  xpos:", data.xpos);
                         console.log("  ypos:", data.ypos);
+                        console.log(socket.handshake.session.heading);
 
                         if(socket.handshake.session.orb.connection.conn === 'COM4'){
                             io.emit('xposCOM4', data.xpos);
@@ -47,6 +48,8 @@ module.exports = function (app, io) {
 
         socket.on('go forward',  () => {
             console.log('go forward');
+            console.log(socket.handshake.session.heading);
+
             socket.handshake.session.orb.roll(60, socket.handshake.session.heading);
         });
         socket.on('stop',  () => {
@@ -55,13 +58,16 @@ module.exports = function (app, io) {
         });
         socket.on('left',  () => {
             console.log('left');
+            console.log(socket.handshake.session.heading);
+
             socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
-            socket.handshake.session.orb.roll(1, socket.handshake.session.heading-=20, 2);
+            socket.handshake.session.orb.roll(60, socket.handshake.session.heading-=20);
         });
         socket.on('right',  () => {
             console.log('right');
+            console.log(socket.handshake.session.heading);
             socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
-            socket.handshake.session.orb.roll(1, socket.handshake.session.heading+=20, 2);
+            socket.handshake.session.orb.roll(60, socket.handshake.session.heading+=20);
         });
 
         socket.on('shoot',  () => {

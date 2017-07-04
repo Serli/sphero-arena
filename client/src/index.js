@@ -9,8 +9,9 @@ import Joystick from "./Joystick";
 import Joystick2 from "./Joystick2";
 import io from 'socket.io-client';
 import FloorPlan from "./FloorPlan";
-
-let socket = io('http://192.168.86.134:8080');
+//
+//let socket = io('http://192.168.86.134:8080');
+let socket = io();
 
 let props = {socket:socket};
 

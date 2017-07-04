@@ -91,8 +91,6 @@ class FloorPlan extends Component {
         ctx.strokeStyle = '#d5d5d5';
         ctx.stroke();
 
-        console.log(this.state.shot);
-
         //shoot
         if(this.state.shot){
             if(this.increment < this.canvasRef.width-250){
