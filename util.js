@@ -8,7 +8,8 @@ util.orbSetup = function (orb, color) {
     orb.color(color);
     orb.setTempOptionFlags(0x08); // Back light always on
     orb.setBackLed(255); // Full intensity
-    orb.setHeading(0);
+    //set orb heading
+    orb.roll(0,180,2);
 
     let opts = {
         flags: 0x01,

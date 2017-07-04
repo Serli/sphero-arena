@@ -17,48 +17,44 @@ class Joystick extends Component {
         manager.on('added', function(evt, nipple) {
             console.log("added");
             nipple.on('move', function(evt,data) {
-                //socket.emit('go forward');
                 console.log(data.angle.degree);
                 if (data.angle.degree > 67.5 && data.angle.degree < 135 ){
                     clearInterval(this.var);
                     this.var = setInterval(function () {
                         console.log('up');
-                        socket.emit('turn', 0);
+                        socket.emit('turn', 180);
                     }, 400);
                 }else if (data.angle.degree > 0 && data.angle.degree < 67.5){
                     clearInterval(this.var);
                     this.var = setInterval(function () {
                         console.log('right-up');
-                        //socket.emit('right');
-                        socket.emit('turn', 60);
+                        socket.emit('turn', 225);
 
                     }, 400);
                 }else if (data.angle.degree > 135 && data.angle.degree < 202.5){
                     clearInterval(this.var);
                     this.var = setInterval(function () {
                         console.log('left-up');
-                        //socket.emit('left');
-                        socket.emit('turn', 320);
+                        socket.emit('turn', 135);
 
                     }, 400);
                 }else if (data.angle.degree > 202.5 && data.angle.degree < 240){
                     clearInterval(this.var);
                     this.var = setInterval(function () {
                         console.log('left-down');
-                        //socket.emit('left');
-                        socket.emit('turn', 240);
+                        socket.emit('turn', 45);
                     }, 400);
                 }else if (data.angle.degree > 240 && data.angle.degree < 290){
                         clearInterval(this.var);
                         this.var = setInterval(function () {
-                            console.log('right-down');
-                            socket.emit('turn', 200);
+                            console.log('down');
+                            socket.emit('turn', 0);
                         }, 400);
                 }else if (data.angle.degree > 290 && data.angle.degree < 359.9){
                     clearInterval(this.var);
                     this.var = setInterval(function () {
                         console.log('right-down');
-                        socket.emit('turn', 140);
+                        socket.emit('turn', 315);
                     }, 400);
                 }
             });
