@@ -26,12 +26,7 @@ class Joystick extends Component {
                 console.log('end');
                 socket.emit('stop');
             });
-        }).on('removed', function (evt) {
-            console.log('removed');
-            socket.emit('stop');
-            window.clearInterval(that.interval);
-        });
-
+        })
     };
         /*
         manager.on('added', function (evt, nipple) {
