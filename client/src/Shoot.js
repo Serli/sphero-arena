@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './Joystick2.css';
+import './Shoot.css';
 import nipple from 'nipplejs';
 
 
 
-class Joystick2 extends Component {
+class Shoot extends Component {
     constructor(props) {
         super(props);
     }
@@ -12,7 +12,7 @@ class Joystick2 extends Component {
     componentDidMount(){
         let socket = this.props.socket;
         const joystickParams = {
-            zone: document.getElementById("joystick2")
+            zone: document.getElementById("shoot")
         };
         const manager = nipple.create(joystickParams);
         manager.on('added', function(evt, nipple) {
@@ -26,4 +26,4 @@ class Joystick2 extends Component {
     }
 }
 
-export default Joystick2;
+export default Shoot;

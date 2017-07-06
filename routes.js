@@ -33,9 +33,6 @@ module.exports = function (app, io) {
                             io.emit('xposCOM6', data.xpos);
                             io.emit('yposCOM6', data.ypos);
                         }
-
-                        socket.handshake.session.xpos =data.xpos;
-                        socket.handshake.session.ypos =data.ypos;
                     }
                 });
             }, 1000);
@@ -45,28 +42,9 @@ module.exports = function (app, io) {
             socket.handshake.session.orb.ping();
         });
 
-        socket.on('go forward',  () => {
-            console.log('go forward');
-            console.log(socket.handshake.session.heading);
-
-            socket.handshake.session.orb.roll(60, socket.handshake.session.heading);
-        });
         socket.on('stop',  () => {
             console.log('stop');
             socket.handshake.session.orb.roll(0, 270);
-        });
-        socket.on('left',  () => {
-            console.log('left');
-            console.log(socket.handshake.session.heading);
-
-            socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
-            socket.handshake.session.orb.roll(60, socket.handshake.session.heading-=20);
-        });
-        socket.on('right',  () => {
-            console.log('right');
-            console.log(socket.handshake.session.heading);
-            socket.handshake.session.heading = verifyHeading(socket.handshake.session.heading);
-            socket.handshake.session.orb.roll(60, socket.handshake.session.heading+=20);
         });
 
         socket.on('shoot',  () => {
@@ -87,22 +65,3 @@ module.exports = function (app, io) {
     app.delete('*', function (req, res) { res.status(404).json({ error:'Invalid DELETE request' });});
 
 };
-
-
-function verifyHeading(heading){
-    //Orb can make complete turns
-    if(heading >= 340){
-        heading = 0;
-    }else if (heading <= 0) {
-        heading = 340;
-    }
-
-    return heading;
-}
-
-function normalize(heading){
-    //Orb can make complete turns
-    heading+=110;
-
-    return heading;
-}
