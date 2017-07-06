@@ -12,10 +12,6 @@ class OrbsConnect extends Component {
         this.handleClickCOM6 = this.handleClickCOM6.bind(this);
     }
 
-    componentDidMount() {
-
-    }
-
     handleClickCOM4(){
         this.props.socket.emit('connect orb', {port: 'COM4', color: 'green'});
         this.setState({
