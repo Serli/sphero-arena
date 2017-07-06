@@ -12,8 +12,7 @@ class Joystick2 extends Component {
     componentDidMount(){
         let socket = this.props.socket;
         const joystickParams = {
-            zone: document.getElementById("joystick2"),
-            color: "blue",
+            zone: document.getElementById("joystick2")
         };
         const manager = nipple.create(joystickParams);
         manager.on('added', function(evt, nipple) {
@@ -23,7 +22,7 @@ class Joystick2 extends Component {
     };
 
     render() {
-        return(<div />);
+        return(<div>SHOOT</div>);
     }
 }
 

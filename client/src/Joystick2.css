@@ -2,8 +2,15 @@
     opacity:0 !important
 }
 
+#joystick2 > .nipple > .back{
+    background: url(shoot.png) 110px 110px !important;
+}
+
 #joystick2{
-     border:1px solid black;
-     background-color: #adadad;
-     height: 120px;
- }
+    border:1px solid black;
+    background-color: #adadad;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 120px;
+}
