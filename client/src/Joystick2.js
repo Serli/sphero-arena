@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Joystick2.css';
+import nipple from 'nipplejs';
 
 
 
@@ -14,7 +15,7 @@ class Joystick2 extends Component {
             zone: document.getElementById("joystick2"),
             color: "blue",
         };
-        const manager = require('nipplejs').create(joystickParams);
+        const manager = nipple.create(joystickParams);
         manager.on('added', function(evt, nipple) {
             console.log("added");
             socket.emit('shoot');

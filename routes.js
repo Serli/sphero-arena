@@ -15,7 +15,6 @@ module.exports = function (app, io) {
             socket.handshake.session.orb.connect(function () {
                 util.orbSetup(socket.handshake.session.orb, data.color);
             });
-            socket.handshake.session.heading = 0;
             setInterval(function() {
                 socket.handshake.session.orb.readLocator(function(err, data) {
                     if (err) {
@@ -24,7 +23,7 @@ module.exports = function (app, io) {
                         console.log(socket.handshake.session.orb.connection.conn, "readLocator:");
                         console.log("  xpos:", data.xpos);
                         console.log("  ypos:", data.ypos);
-                        console.log(socket.handshake.session.heading);
+                        //console.log(socket.handshake.session.heading);
 
                         if(socket.handshake.session.orb.connection.conn === 'COM4'){
                             io.emit('xposCOM4', data.xpos);
@@ -54,7 +53,7 @@ module.exports = function (app, io) {
         });
         socket.on('stop',  () => {
             console.log('stop');
-            socket.handshake.session.orb.roll(0, socket.handshake.session.heading);
+            socket.handshake.session.orb.roll(0, 270);
         });
         socket.on('left',  () => {
             console.log('left');
@@ -76,8 +75,8 @@ module.exports = function (app, io) {
         });
 
         socket.on('turn',  (heading) => {
-            socket.handshake.session.heading = heading;
-            socket.handshake.session.orb.roll(60, heading);
+            console.log(heading);
+            socket.handshake.session.orb.roll(60, (-heading % 360 + 360) % 360);
         });
 
     });
