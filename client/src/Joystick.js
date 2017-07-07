@@ -13,6 +13,11 @@ class Joystick extends Component {
         const joystickParams = {
             zone: document.getElementById("joystick"),
             color: "red",
+            mode: 'static',
+            position: {
+                left: '50%',
+                top: '50%'
+            }
         };
         const manager = nipple.create(joystickParams);
         manager.on('added', function (evt, nipple) {
