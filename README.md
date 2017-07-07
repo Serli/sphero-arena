@@ -81,6 +81,7 @@ On pourra utiliser React Router
 
 Améliorer globalement l'aspect graphique
 
+Canvas s'adapte à la taille de l'écran
 
 # Documentation 
 * [Sphero JS API](https://sdk.sphero.com/community-apis/javascript-sdk/) 
