@@ -69,7 +69,7 @@ class FloorPlan extends Component {
 
         //COM4 path drawing orb moving on canvas
         ctx.beginPath();
-        ctx.arc(250 + parseInt(this.state.yposCOM4, 10), 250 + parseInt(this.state.xposCOM4, 10), 20, 0, 2 * Math.PI, false);
+        ctx.arc(this.canvasRef.width/4 + parseInt(this.state.yposCOM4, 10), this.canvasRef.height/2 + parseInt(this.state.xposCOM4, 10), 20, 0, 2 * Math.PI, false);
         ctx.fillStyle = 'green';
         ctx.fill();
         ctx.lineWidth = 3;
@@ -78,7 +78,7 @@ class FloorPlan extends Component {
 
         //COM6 path drawing orb moving on canvas
         ctx.beginPath();
-        ctx.arc(750 - parseInt(this.state.yposCOM6, 10), 250 + parseInt(this.state.xposCOM6, 10), 20, 0, 2 * Math.PI, false);
+        ctx.arc((this.canvasRef.width/4)*3 - parseInt(this.state.yposCOM6, 10), this.canvasRef.height/2 + parseInt(this.state.xposCOM6, 10), 20, 0, 2 * Math.PI, false);
         ctx.fillStyle = 'yellow';
         ctx.fill();
         ctx.lineWidth = 3;
@@ -87,7 +87,7 @@ class FloorPlan extends Component {
 
         //shoot
         if(this.state.shot){
-            if(this.increment < this.canvasRef.width-250){
+            if(this.increment < this.canvasRef.width-this.canvasRef.width/4){
                 this.increment+=10;
                 ctx.beginPath();
                 /*
