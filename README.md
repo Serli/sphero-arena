@@ -79,12 +79,13 @@ On pourra utiliser React Router
 
 Éventuellement stocker l'état du canvas et pouvoir avoir une fonction de replay
 
-
+Améliorer globalement l'aspect graphique
 
 
 # Documentation 
-[Sphero JS API](https://sdk.sphero.com/community-apis/javascript-sdk/) 
-[React-Workshop](https://github.com/react-bootcamp/react-workshop)
+* [Sphero JS API](https://sdk.sphero.com/community-apis/javascript-sdk/) 
+* [React-Workshop](https://github.com/react-bootcamp/react-workshop)
+
 ## Authors
 
 * **Baptiste Garcin**
