@@ -1,7 +1,6 @@
 
 #joystick{
     border:1px solid black;
-    background-color: #adadad;
     height: 120px;
     text-align: center;
     vertical-align: middle;
@@ -9,10 +8,10 @@
 }
 
 #joystick .nipple .front {
-    padding: 10px !important;
     box-shadow: 0 10px 20px rgba(101, 109, 120, 0.4) !important;
     background: -webkit-linear-gradient(top, #fff 0%, #EBEEF3 100%) !important;
     background: linear-gradient(to bottom, #fff 0%, #EBEEF3 100%) !important;
+    opacity: 0.99 !important;
 }
 
 
@@ -32,4 +31,37 @@
     border-radius: 100%;
     z-index: 2;
     border: 1px solid rgba(204, 209, 217, 0.3);
+}
+
+#joystick .nipple .front::after {
+    position: absolute;
+    content: '';
+    left: calc(50% - 50px);
+    top: calc(50% - 50px);
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    box-shadow: 0 2px 0 rgba(255, 255, 255, 0.6);
+    background: -webkit-linear-gradient(top, #e8edf4 0%, #f5f7fa 100%);
+    background: linear-gradient(to bottom, #e8edf4 0%, #f5f7fa 100%);
+}
+
+#joystick .nipple .back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(236, 240, 246, 1)  !important;
+    padding: 6px;
+}
+
+#joystick .nipple .back::after {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    content: '';
+    width: 163px;
+    height: 163px;
+    border-radius: 100%;
+    box-shadow: inset 0 0 30px rgba(67, 74, 84, 0.32);
+    background: radial-gradient(ellipse at center, #fcfdff 0%, #d8dee7 100%);
 }
