@@ -1,0 +1,16 @@
+#shoot > .nipple > .front{
+    opacity:0 !important
+}
+
+#shoot > .nipple > .back{
+    background: url(shoot.png) 110px 110px !important;
+}
+
+#shoot{
+    border:1px solid black;
+    background-color: #adadad;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 120px;
+}
