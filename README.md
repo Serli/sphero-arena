@@ -14,7 +14,8 @@ auxiliaire.
 
 Afin de pouvoir utiliser le paquet serialport qui est utile à la connexion bluetooth il nous est demandé d'installer 
 les différentes librairies C++, l'installation de 'Visual Studio Express 2013 for Windows Desktop'.
-permettra d'obtenir toutes les librairies nécessaires.
+permettra d'obtenir toutes les librairies nécessaires. Il est possible que cette étape ne soit pas nécessaire si vous
+possédez déjà les librairies C++.
 
 Pour cela il faut ouvrir un powershell en admin
 ```
@@ -23,8 +24,16 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/in
 choco install visualstudioexpress2013windowsdesktop 
 ```
 
+Déplacez-vous à l'endroit de votre choix où se situera votre projet puis
+```
+git clone https://github.com/Serli/sphero-arena.git
+```
+
+Modifier la ligne proxy dans sphero-arena/client/package.json en remplacant par votre adresse IP
+
 # Installation
-- Appairer chaque boule au bluetooth de l'ordinateur
+
+- Jumeler chaque boule au bluetooth de l'ordinateur
 - Pour plus de précisions sur les ports bluetooth dans le panneau bluetooth de Windows descendre en bas 
 puis paramètres Bluetooth avancés puis onglet Ports COM et noter les ports sortant, c'est ceux-ci qu'on utilise
 
@@ -37,7 +46,7 @@ npm start --public "ip-address"
 Le serveur frontend démarre sur le port 3000
 
 Puis il faudra lancer le serveur backend qui contrôle la boule robotique
-Ouvrir un auter terminal Node.js
+Ouvrir un autre terminal Node.js
 
 ```
 cd sphero-arena
@@ -52,7 +61,7 @@ La connexion des websockets entre le frontend et le backend se fait grâce à un
 # Fonctionnement 
 - Vérifier que le serveur frontend et backend sont bien lancés
 - Allumer une boule (la boule Serli correspond à COM4 et la boule de Chris correspond à COM6)
-- Sur navigateur aller à l'adresse 192.168.86.134:3000
+- Sur navigateur aller à l'adresse "votre ip":3000
 - Cliquer sur le bouton tout en haut de connexion d'une orbe
 - Si le backend crash avec l'erreur ERROR PORT NOT OPEN cela vient d'un problème de synchronisation bluetooth
 - Dupliquer l'onglet
@@ -81,7 +90,7 @@ On pourra utiliser React Router
 
 Améliorer globalement l'aspect graphique
 
-Canvas s'adapte à la taille de l'écran
+Catch les exceptions à la connexion de la boule pour empêcher le serveur de s'arrêter et afficher plutôt un message d'erreur
 
 # Documentation 
 * [Sphero JS API](https://sdk.sphero.com/community-apis/javascript-sdk/) 
