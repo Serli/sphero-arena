@@ -60,7 +60,8 @@ La connexion des websockets entre le frontend et le backend se fait grâce à un
 
 # Fonctionnement 
 - Vérifier que le serveur frontend et backend sont bien lancés
-- Allumer une boule (la boule Serli correspond à COM4 et la boule de Chris correspond à COM6)
+- Allumer une boule (de mon côté la boule Serli correspond à COM4 et la boule de Chris correspond à COM6) les ports
+  utilisés par votre pc seront sûrement différents des miens.
 - Sur navigateur aller à l'adresse "votre ip":3000
 - Cliquer sur le bouton tout en haut de connexion d'une orbe
 - Si le backend crash avec l'erreur ERROR PORT NOT OPEN cela vient d'un problème de synchronisation bluetooth
