@@ -30,7 +30,7 @@ class Joystick extends Component {
     };
 
     render() {
-        return(<div>MOVE</div>);
+        return(<div id="joystick">MOVE</div>);
     }
 }
 

@@ -6,12 +6,47 @@ import Joystick from "./Joystick";
 import Shoot from "./Shoot";
 import io from 'socket.io-client';
 import FloorPlan from "./FloorPlan";
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom'
 
 let socket = io();
 
-let props = {socket:socket};
+const BasicExample = (props) => (
+    <Router>
+        <div>
+            <ul>
+                <li><Link to="/connect">Orbs connection</Link></li>
+                <li><Link to="/FloorPlan">FloorPlan</Link></li>
+                <li><Link to="/controls">controls</Link></li>
+            </ul>
 
-ReactDOM.render(React.createElement(OrbsConnect, props), document.getElementById('orbsConnect'));
-ReactDOM.render(React.createElement(FloorPlan, props), document.getElementById('floorPlan'));
-ReactDOM.render(React.createElement(Joystick, props), document.getElementById('joystick'));
-ReactDOM.render(React.createElement(Shoot, props), document.getElementById('shoot'));
+            <hr/>
+
+            <Route exact path='/FloorPlan' component={() => (
+                <FloorPlan socket={socket}/>
+            )}/>
+            <Route exact path='/connect' component={() => (
+                <OrbsConnect socket={socket}/>
+            )}/>
+            <Route exact path='/controls' component={() => (
+            <div>
+                <div>
+                    <Joystick socket={socket}/>
+                </div>
+                <div>
+                    <Shoot socket={socket}/>
+                </div>
+            </div>
+            )}/>
+        </div>
+    </Router>
+);
+
+ReactDOM.render(React.createElement(BasicExample), document.getElementById('basic'));
+
+
+
+

@@ -22,7 +22,7 @@ class Shoot extends Component {
     };
 
     render() {
-        return(<div>SHOOT</div>);
+        return(<div id="shoot">SHOOT</div>);
     }
 }
 
