@@ -92,6 +92,10 @@ Améliorer globalement l'aspect graphique
 
 Catch les exceptions à la connexion de la boule pour empêcher le serveur de s'arrêter et afficher plutôt un message d'erreur
 
+Passer en paramètre les ports bluetooth des différentes boules
+
+Implémentation de smart components and dumb components [Smart dumb components react](https://jaketrent.com/post/smart-dumb-components-react/)
+
 # Documentation 
 * [Sphero JS API](https://sdk.sphero.com/community-apis/javascript-sdk/) 
 * [React-Workshop](https://github.com/react-bootcamp/react-workshop)
