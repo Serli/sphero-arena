@@ -3,9 +3,6 @@ import './Joystick.css';
 import nipple from 'nipplejs';
 
 class Joystick extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount = () => {
         let socket = this.props.socket;

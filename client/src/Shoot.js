@@ -5,10 +5,6 @@ import nipple from 'nipplejs';
 
 
 class Shoot extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount(){
         let socket = this.props.socket;
         const joystickParams = {
