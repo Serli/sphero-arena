@@ -19,11 +19,12 @@ let socket = io();
 const BasicExample = (props) => (
     <Router>
         <div>
-            <ul>
-                <li><Link to="/connect">Orbs connection</Link></li>
-                <li><Link to="/FloorPlan">FloorPlan</Link></li>
-                <li><Link to="/controls">controls</Link></li>
-            </ul>
+            <nav>
+                Sphero Arena &nbsp;
+                <Link to="/connect">Orbs connection</Link>&nbsp;
+                <Link to="/FloorPlan">FloorPlan</Link>&nbsp;
+                <Link to="/controls">controls</Link>
+            </nav>
 
             <hr/>
 

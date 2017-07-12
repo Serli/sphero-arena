@@ -79,7 +79,8 @@ la connexion avec la boule.
 
 Pour le moment on peut faire seulement un tir depuis la position de la boule verte.
 Ajouter la possibilité de faire plusieurs tirs avec un délai entre chaque tir
- avec une jauge qui indique quand le prochain tir va être disponible
+ avec une jauge qui indique quand le prochain tir va être disponible et dont l'orientation du tir dépend
+ du heading de la boule.
 
 Toutes les infos sont sur la même page, il faudrait dispatcher en 3 écrans
 - un écran de connexion

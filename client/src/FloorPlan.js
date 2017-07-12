@@ -54,60 +54,63 @@ class FloorPlan extends Component {
     }
 
     draw = () => {
-        const ctx = this.canvasRef.getContext("2d");
 
-        //draw X and Y pos of orbs
-        ctx.clearRect(0, 0, this.canvasRef.width, this.canvasRef.height);
-        ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
-        ctx.font = "30px Arial";
-        ctx.fillText(this.state.xposCOM4,10,50);
-        ctx.fillText(this.state.yposCOM4,10,100);
-        ctx.fillText(this.state.xposCOM6,10,150);
-        ctx.fillText(this.state.yposCOM6,10,200);
+        if(this.canvasRef !== null){
+            const ctx = this.canvasRef.getContext("2d");
 
-        ctx.fillText(this.increment,10,250);
+            //draw X and Y pos of orbs
+            ctx.clearRect(0, 0, this.canvasRef.width, this.canvasRef.height);
+            ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
+            ctx.font = "30px Arial";
+            ctx.fillText(this.state.xposCOM4,10,50);
+            ctx.fillText(this.state.yposCOM4,10,100);
+            ctx.fillText(this.state.xposCOM6,10,150);
+            ctx.fillText(this.state.yposCOM6,10,200);
+
+            ctx.fillText(this.increment,10,250);
 
 
-        //COM4 path drawing orb moving on canvas
-        ctx.beginPath();
-        ctx.arc(this.canvasRef.width/4 + parseInt(this.state.yposCOM4, 10), this.canvasRef.height/2 + parseInt(this.state.xposCOM4, 10), 20, 0, 2 * Math.PI, false);
-        ctx.fillStyle = 'green';
-        ctx.fill();
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = '#d5d5d5';
-        ctx.stroke();
+            //COM4 path drawing orb moving on canvas
+            ctx.beginPath();
+            ctx.arc(this.canvasRef.width/4 + parseInt(this.state.yposCOM4, 10), this.canvasRef.height/2 + parseInt(this.state.xposCOM4, 10), 20, 0, 2 * Math.PI, false);
+            ctx.fillStyle = 'green';
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#d5d5d5';
+            ctx.stroke();
 
-        //COM6 path drawing orb moving on canvas
-        ctx.beginPath();
-        ctx.arc((this.canvasRef.width/4)*3 - parseInt(this.state.yposCOM6, 10), this.canvasRef.height/2 + parseInt(this.state.xposCOM6, 10), 20, 0, 2 * Math.PI, false);
-        ctx.fillStyle = 'yellow';
-        ctx.fill();
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = '#d5d5d5';
-        ctx.stroke();
+            //COM6 path drawing orb moving on canvas
+            ctx.beginPath();
+            ctx.arc((this.canvasRef.width/4)*3 - parseInt(this.state.yposCOM6, 10), this.canvasRef.height/2 + parseInt(this.state.xposCOM6, 10), 20, 0, 2 * Math.PI, false);
+            ctx.fillStyle = 'yellow';
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#d5d5d5';
+            ctx.stroke();
 
-        //shoot
-        if(this.state.shot){
-            if(this.increment < this.canvasRef.width-this.canvasRef.width/4){
-                this.increment+=10;
-                ctx.beginPath();
-                /*
-                ctx.moveTo(this.increment + parseInt(this.state.xposCOM4, 10), this.increment + parseInt(this.state.xposCOM4, 10));
-                ctx.lineTo(this.increment + 20+parseInt(this.state.xposCOM4, 10), this.increment + 20+parseInt(this.state.yposCOM4, 10));
-                */
-                ctx.moveTo(this.increment+250, 250);
-                ctx.lineTo(this.increment + 300, 250);
+            //shoot
+            if(this.state.shot){
+                if(this.increment < this.canvasRef.width-this.canvasRef.width/4){
+                    this.increment+=10;
+                    ctx.beginPath();
+                    /*
+                     ctx.moveTo(this.increment + parseInt(this.state.xposCOM4, 10), this.increment + parseInt(this.state.xposCOM4, 10));
+                     ctx.lineTo(this.increment + 20+parseInt(this.state.xposCOM4, 10), this.increment + 20+parseInt(this.state.yposCOM4, 10));
+                     */
+                    ctx.moveTo(this.increment+250, 250);
+                    ctx.lineTo(this.increment + 300, 250);
 
-                ctx.stroke();
-            }else{
-                this.setState({
-                    shot: false,
-                });
-                this.increment = 0;
+                    ctx.stroke();
+                }else{
+                    this.setState({
+                        shot: false,
+                    });
+                    this.increment = 0;
+                }
             }
-        }
 
-        setTimeout(this.draw, 100);
+            setTimeout(this.draw, 100);
+        }
     };
 
     render() {
