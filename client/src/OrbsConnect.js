@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import {withRouter} from "react-router-dom";
 
-class OrbsConnect extends Component {
+
+export class OrbsConnect extends Component {
 
     constructor(props) {
         super(props);
@@ -11,6 +13,7 @@ class OrbsConnect extends Component {
     }
 
     handleClickCOM4(){
+        this.props.history.push('/controls');
         this.props.socket.emit('connect orb', {port: 'COM4', color: 'green'});
         this.setState({
             isToggleOffCOM4: true,
@@ -19,6 +22,7 @@ class OrbsConnect extends Component {
     }
 
     handleClickCOM6(){
+        this.props.history.push('/controls');
         this.props.socket.emit('connect orb', {port: 'COM6', color: 'gold'});
         this.setState({
             isToggleOffCOM6: true,
@@ -36,4 +40,4 @@ class OrbsConnect extends Component {
     }
 }
 
-export default OrbsConnect;
+export default withRouter(OrbsConnect);
