@@ -11,6 +11,8 @@ import {
     Route,
     Link
 } from 'react-router-dom'
+import {Col, Row} from 'react-bootstrap'
+
 
 let socket = io();
 
@@ -32,14 +34,14 @@ const BasicExample = (props) => (
                 <OrbsConnect socket={socket}/>
             )}/>
             <Route exact path='/controls' component={() => (
-            <div>
-                <div>
+            <Row>
+                <Col xs={8} sm={8} lg={8}>
                     <Joystick socket={socket}/>
-                </div>
-                <div>
+                </Col>
+                <Col xs={4} sm={4} lg={4}>
                     <Shoot socket={socket}/>
-                </div>
-            </div>
+                </Col>
+            </Row>
             )}/>
         </div>
     </Router>

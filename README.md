@@ -84,7 +84,7 @@ Ajouter la possibilité de faire plusieurs tirs avec un délai entre chaque tir
 Toutes les infos sont sur la même page, il faudrait dispatcher en 3 écrans
 - un écran de connexion
 - l'écran du jeu en temps réel
-- l'acran de contrôle avec le joystick 
+- l'écran de contrôle avec le joystick 
 On pourra utiliser React Router
 
 Éventuellement stocker l'état du canvas et pouvoir avoir une fonction de replay
