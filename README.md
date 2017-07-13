@@ -82,6 +82,7 @@ Ajouter la possibilité de faire plusieurs tirs avec un délai entre chaque tir
  avec une jauge qui indique quand le prochain tir va être disponible et dont l'orientation du tir dépend
  du heading de la boule.
 
+Gestion des collisions sur l'écran de jeu en temps réel
 
 Éventuellement stocker l'état du canvas et pouvoir avoir une fonction de replay
 
