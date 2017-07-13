@@ -5,7 +5,7 @@ import './FloorPlan.css';
 class FloorPlan extends Component {
     constructor(props){
         super(props);
-        this.state = {xposCOM4: '0', yposCOM4:'0', xposCOM6:'0', yposCOM6:'0', shootPosX: '0', shootPosY:'0', shot: false};
+        this.state = {mounted: false, xposCOM4: '0', yposCOM4:'0', xposCOM6:'0', yposCOM6:'0', shootPosX: '0', shootPosY:'0', shot: false};
         this.x=0;
         this.y=0;
         this.increment = 0;
@@ -18,39 +18,58 @@ class FloorPlan extends Component {
     }
 
     updateXCOM4InState(data) {
-        this.setState({
-            xposCOM4: data
-        })
+        if(this.state.mounted){
+            this.setState({
+                xposCOM4: data
+            })
+        }
     }
 
     updateYCOM4InState(data) {
-        this.setState({
-            yposCOM4: data
-        })
+        if(this.state.mounted) {
+            this.setState({
+                yposCOM4: data
+            })
+        }
     }
 
     updateXCOM6InState(data) {
-        this.setState({
-            xposCOM6: data
-        })
+        if(this.state.mounted) {
+            this.setState({
+                xposCOM6: data
+            })
+        }
     }
 
     updateYCOM6InState(data) {
-        this.setState({
-            yposCOM6: data
-        })
+        if(this.state.mounted) {
+            this.setState({
+                yposCOM6: data
+            })
+        }
     }
 
     updateShoot(data) {
         //need to pass which orb shot
         console.log('someone shoot');
-        this.setState({
-            shot: true
-        })
+        if(this.state.mounted) {
+            this.setState({
+                shot: true
+            })
+        }
     }
 
     componentDidMount(){
+        this.setState({
+            mounted: true
+        });
         this.draw();
+    }
+
+    componentWillUnmount(){
+        this.setState({
+            mounted: false
+        });
     }
 
     draw = () => {
