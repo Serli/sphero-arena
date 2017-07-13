@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './FloorPlan.css';
+import '../css/FloorPlan.css';
 
 
 class FloorPlan extends Component {

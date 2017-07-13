@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Shoot.css';
+import '../css/Shoot.css';
 import nipple from 'nipplejs';
 
 

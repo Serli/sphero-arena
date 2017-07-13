@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Joystick.css';
+import '../css/Joystick.css';
 import nipple from 'nipplejs';
 
 class Joystick extends Component {

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import OrbsConnect from "./OrbsConnect";
-import Joystick from "./Joystick";
-import Shoot from "./Shoot";
-import Exception from "./Exception";
+import OrbsConnect from "./components/OrbsConnect";
+import Joystick from "./components/Joystick";
+import Shoot from "./components/Shoot";
+import Exception from "./components/Exception";
 import io from 'socket.io-client';
-import FloorPlan from "./FloorPlan";
+import FloorPlan from "./components/FloorPlan";
 import {
     BrowserRouter as Router,
     Route,

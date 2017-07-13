@@ -75,6 +75,10 @@ contrôle des boules, parfois des messages de mauvaise synchronisation peuvent a
 la connexion avec la boule.
 
 
+# Problèmes connus
+
+En Wi-fi le --public + IP pour le frontend n'exposera pas le serveur pour d'autres ordinateurs, mobiles  
+
 # Reste à faire
 
 Pour le moment on peut faire seulement un tir depuis la position de la boule verte.
