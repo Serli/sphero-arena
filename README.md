@@ -82,19 +82,16 @@ Ajouter la possibilité de faire plusieurs tirs avec un délai entre chaque tir
  avec une jauge qui indique quand le prochain tir va être disponible et dont l'orientation du tir dépend
  du heading de la boule.
 
-Toutes les infos sont sur la même page, il faudrait dispatcher en 3 écrans
-- un écran de connexion
-- l'écran du jeu en temps réel
-- l'écran de contrôle avec le joystick 
-On pourra utiliser React Router
 
 Éventuellement stocker l'état du canvas et pouvoir avoir une fonction de replay
 
-Améliorer globalement l'aspect graphique
+Améliorer l'aspect graphique
 
 Catch les exceptions à la connexion de la boule pour empêcher le serveur de s'arrêter et afficher plutôt un message d'erreur
 
 Passer en paramètre les ports bluetooth des différentes boules
+
+Selon les erreurs renvoyées par la boule, proposer à l'utilisateur de ping son orbe pour la resynchroniser
 
 Implémentation de smart components and dumb components [Smart dumb components react](https://jaketrent.com/post/smart-dumb-components-react/)
 
@@ -105,7 +102,3 @@ Implémentation de smart components and dumb components [Smart dumb components r
 ## Authors
 
 * **Baptiste Garcin**
-
-## License
-
-This project is licensed under the MIT License

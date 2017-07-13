@@ -38,12 +38,22 @@ module.exports = function (app, io) {
         });
         socket.on('ping orb', () => {
             console.log('ping orb');
-            socket.handshake.session.orb.ping();
+            try {
+                socket.handshake.session.orb.ping();
+            }
+            catch (e) {
+                io.emit('exception',"Orb seems to not be able to resynchronize");
+            }
         });
 
         socket.on('stop',  () => {
             console.log('stop');
-            socket.handshake.session.orb.roll(0, 270);
+            try {
+                socket.handshake.session.orb.roll(0, 270);
+            }
+            catch (e) {
+                io.emit('exception',"Orb seems not connected or disconnected ! Try pinging orb to resynchronize");
+            }
         });
 
         socket.on('shoot',  () => {
@@ -53,7 +63,12 @@ module.exports = function (app, io) {
 
         socket.on('turn',  (heading) => {
             //normalize orb heading
-            socket.handshake.session.orb.roll(60, (-heading % 360 + 360) % 360);
+            try {
+                socket.handshake.session.orb.roll(60, (-heading % 360 + 360) % 360);
+            }
+            catch (e) {
+                io.emit('exception',"Orb seems not connected or disconnected ! Try pinging orb to resynchronize");
+            }
         });
 
     });

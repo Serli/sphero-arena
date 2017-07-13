@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import OrbsConnect from "./OrbsConnect";
 import Joystick from "./Joystick";
 import Shoot from "./Shoot";
+import Exception from "./Exception";
 import io from 'socket.io-client';
 import FloorPlan from "./FloorPlan";
 import {
@@ -16,7 +17,7 @@ import {Col, Row} from 'react-bootstrap'
 
 let socket = io();
 
-const BasicExample = (props) => (
+const BasicExample = () => (
     <Router>
         <div>
             <nav>
@@ -25,6 +26,8 @@ const BasicExample = (props) => (
                 <Link to="/FloorPlan">FloorPlan</Link>&nbsp;
                 <Link to="/controls">controls</Link>
             </nav>
+
+            <Exception socket={socket}/>
 
             <hr/>
 
