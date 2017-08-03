@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
-
+import {Button, ButtonToolbar} from 'react-bootstrap';
 
 export class OrbsConnect extends Component {
 
@@ -14,7 +14,7 @@ export class OrbsConnect extends Component {
 
     handleClickCOM4(){
         this.props.history.push('/controls');
-        this.props.socket.emit('connect orb', {port: 'COM4', color: 'green'});
+        this.props.socket.emit('connect orb', {port: 'COM7', color: 'green'});
         this.setState({
             isToggleOffCOM4: true,
             styleCOM4:'grey'
@@ -23,7 +23,7 @@ export class OrbsConnect extends Component {
 
     handleClickCOM6(){
         this.props.history.push('/controls');
-        this.props.socket.emit('connect orb', {port: 'COM6', color: 'gold'});
+        this.props.socket.emit('connect orb', {port: 'COM9', color: 'gold'});
         this.setState({
             isToggleOffCOM6: true,
             styleCOM6:'grey'
@@ -33,8 +33,14 @@ export class OrbsConnect extends Component {
     render() {
         return (
             <div>
-                <button style={{backgroundColor:this.state.styleCOM4}} onClick={this.handleClickCOM4} id="orbCOM4" disabled={this.state.isToggleOffCOM4}>COM4 ORB</button>
+                <div> Quelle orbe voulez vous connecter ? </div>
+                <ButtonToolbar>
+                    <Button bsStyle="info" bsSize="large" onClick={this.handleClickCOM4} disabled={this.state.isToggleOffCOM4}>Com4</Button>
+                    <Button bsStyle="info" bsSize="large" onClick={this.handleClickCOM6} disabled={this.state.isToggleOffCOM6}>Com6</Button>
+                </ButtonToolbar>
+                {/*<button style={{backgroundColor:this.state.styleCOM4}} onClick={this.handleClickCOM4} id="orbCOM4" disabled={this.state.isToggleOffCOM4}>COM4 ORB</button>
                 <button style={{backgroundColor:this.state.styleCOM6}} onClick={this.handleClickCOM6} id="orbCOM6" disabled={this.state.isToggleOffCOM6}>COM6 ORB</button>
+                */}
             </div>
         );
     }

@@ -12,7 +12,15 @@ import {
     Route,
     Link
 } from 'react-router-dom'
-import {Col, Row} from 'react-bootstrap'
+import {
+    Col,
+    Row,
+    Navbar,
+    NavItem,
+    Nav
+} from 'react-bootstrap'
+
+
 
 
 let socket = io();
@@ -20,16 +28,29 @@ let socket = io();
 const BasicExample = () => (
     <Router>
         <div>
-            <nav>
-                Sphero Arena &nbsp;
-                <Link to="/connect">Orbs connection</Link>&nbsp;
-                <Link to="/FloorPlan">FloorPlan</Link>&nbsp;
-                <Link to="/controls">controls</Link>
-            </nav>
-
+            <Navbar inverse collapseOnSelect>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <a href="#">Sphero Arena</a>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav>
+                        <NavItem eventKey={1} href="/connect">
+                            <Link to="/connect">Orbs connection</Link> {/*LinkContainer ?*/}
+                        </NavItem>
+                        <NavItem eventKey={2} href="/FloorPlan">
+                            <Link to="/FloorPlan">FloorPlan</Link>
+                        </NavItem>
+                        <NavItem eventKey={3} href="/controls">
+                            <Link to="/controls">Controls</Link>
+                        </NavItem>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
             <Exception socket={socket}/>
 
-            <hr/>
 
             <Route exact path='/FloorPlan' component={() => (
                 <FloorPlan socket={socket}/>
@@ -38,14 +59,14 @@ const BasicExample = () => (
                 <OrbsConnect socket={socket}/>
             )}/>
             <Route exact path='/controls' component={() => (
-            <Row>
-                <Col xs={8} sm={8} lg={8}>
-                    <Joystick socket={socket}/>
-                </Col>
-                <Col xs={4} sm={4} lg={4}>
-                    <Shoot socket={socket}/>
-                </Col>
-            </Row>
+                <Row>
+                    <Col xs={8} sm={8} lg={8}>
+                        <Joystick socket={socket}/>
+                    </Col>
+                    <Col xs={4} sm={4} lg={4}>
+                        <Shoot socket={socket}/>
+                    </Col>
+                </Row>
             )}/>
         </div>
     </Router>

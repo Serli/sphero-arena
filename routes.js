@@ -24,11 +24,11 @@ module.exports = function (app, io) {
                         console.log("  xpos:", data.xpos);
                         console.log("  ypos:", data.ypos);
 
-                        if(socket.handshake.session.orb.connection.conn === 'COM4'){
+                        if(socket.handshake.session.orb.connection.conn === 'COM7'){
                             io.emit('xposCOM4', data.xpos);
                             io.emit('yposCOM4', data.ypos);
                         }
-                        if(socket.handshake.session.orb.connection.conn === 'COM6'){
+                        if(socket.handshake.session.orb.connection.conn === 'COM9'){
                             io.emit('xposCOM6', data.xpos);
                             io.emit('yposCOM6', data.ypos);
                         }
