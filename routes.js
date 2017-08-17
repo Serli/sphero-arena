@@ -15,6 +15,7 @@ module.exports = function (app, io) {
             socket.handshake.session.orb.connect(function () {
                 util.orbSetup(socket.handshake.session.orb, data.color);
             });
+            
             setInterval(function() {
                 socket.handshake.session.orb.readLocator(function(err, data) {
                     if (err) {
@@ -36,6 +37,7 @@ module.exports = function (app, io) {
                 });
             }, 1000);
         });
+
         socket.on('ping orb', () => {
             console.log('ping orb');
             try {
@@ -56,9 +58,10 @@ module.exports = function (app, io) {
             }
         });
 
-        socket.on('shoot',  () => {
+        socket.on('shoot', () => {
             console.log('shoot');
-            io.emit('shoot received');
+            console.log(socket.handshake.session.orb.connection.conn);
+            io.emit('shoot received', socket.handshake.session.orb.connection.conn);
         });
 
         socket.on('turn',  (heading) => {

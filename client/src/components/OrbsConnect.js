@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
-import {Button, ButtonToolbar} from 'react-bootstrap';
+import {Button, ButtonToolbar, Row, Col} from 'react-bootstrap';
 
 export class OrbsConnect extends Component {
 
@@ -32,16 +32,22 @@ export class OrbsConnect extends Component {
 
     render() {
         return (
-            <div>
-                <div> Quelle orbe voulez vous connecter ? </div>
-                <ButtonToolbar>
-                    <Button bsStyle="info" bsSize="large" onClick={this.handleClickCOM4} disabled={this.state.isToggleOffCOM4}>Com4</Button>
-                    <Button bsStyle="info" bsSize="large" onClick={this.handleClickCOM6} disabled={this.state.isToggleOffCOM6}>Com6</Button>
-                </ButtonToolbar>
-                {/*<button style={{backgroundColor:this.state.styleCOM4}} onClick={this.handleClickCOM4} id="orbCOM4" disabled={this.state.isToggleOffCOM4}>COM4 ORB</button>
-                <button style={{backgroundColor:this.state.styleCOM6}} onClick={this.handleClickCOM6} id="orbCOM6" disabled={this.state.isToggleOffCOM6}>COM6 ORB</button>
-                */}
-            </div>
+            <Row>
+                <Col xs={2} sm={2} lg={2}>
+                </Col>
+                <Col xs={10} sm={10} lg={10}>
+                    <div>
+                        <div> Quelle orbe voulez vous connecter ? </div>
+                        <ButtonToolbar>
+                            <Button bsStyle="success" bsSize="large" onClick={this.handleClickCOM4} disabled={this.state.isToggleOffCOM4}>Com4</Button>
+                            <Button bsStyle="warning" bsSize="large" onClick={this.handleClickCOM6} disabled={this.state.isToggleOffCOM6}>Com6</Button>
+                        </ButtonToolbar>
+                        {/*<button style={{backgroundColor:this.state.styleCOM4}} onClick={this.handleClickCOM4} id="orbCOM4" disabled={this.state.isToggleOffCOM4}>COM4 ORB</button>
+                        <button style={{backgroundColor:this.state.styleCOM6}} onClick={this.handleClickCOM6} id="orbCOM6" disabled={this.state.isToggleOffCOM6}>COM6 ORB</button>
+                        */}
+                    </div>
+                </Col>
+            </Row>
         );
     }
 }

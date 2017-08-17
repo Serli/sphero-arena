@@ -12,7 +12,8 @@ class FloorPlan extends Component {
             yposCOM6:'0',
             shootPosX: '0',
             shootPosY:'0',
-            shot: false};
+            shot: false,
+            orb: ''};
         this.x=0;
         this.y=0;
         this.increment = 0; //increment for shoot animation
@@ -61,7 +62,8 @@ class FloorPlan extends Component {
         console.log('someone shoot');
         if(this.state.mounted) {
             this.setState({
-                shot: true
+                shot: true,
+                orb: data
             })
         }
     }
@@ -108,25 +110,41 @@ class FloorPlan extends Component {
             ctx.restore();
 
             //shoot
-            if(this.state.shot){
-                if(this.increment < this.canvasRef.width-this.canvasRef.width/4){
-                    this.increment+=10;
-                    ctx.beginPath();
-                    /*
-                     ctx.moveTo(this.increment + parseInt(this.state.xposCOM4, 10), this.increment + parseInt(this.state.xposCOM4, 10));
-                     ctx.lineTo(this.increment + 20+parseInt(this.state.xposCOM4, 10), this.increment + 20+parseInt(this.state.yposCOM4, 10));
-                     */
-                    ctx.save();
-                    ctx.translate(200,250);
-                    ctx.moveTo(this.increment, this.state.yposCOM4);
-                    ctx.lineTo(this.increment + 50, this.state.yposCOM4);
-                    ctx.restore();
-                    ctx.stroke();
-                }else{
-                    this.setState({
-                        shot: false,
-                    });
-                    this.increment = 0;
+            if(this.state.shot) {
+                if (this.state.orb == 'COM7') {
+                    if (this.increment < this.canvasRef.width - this.canvasRef.width / 4) {
+                        this.increment += 10;
+                        ctx.save();
+                        ctx.translate(200, 250);
+                        ctx.moveTo(this.increment + (this.state.xposCOM4 * 2), this.state.yposCOM4 * 2);
+                        ctx.lineTo(this.increment + 50 + (this.state.xposCOM4 * 2), this.state.yposCOM4 * 2);
+                        ctx.restore();
+                        ctx.stroke();
+                    } else {
+                        this.setState({
+                            shot: false,
+                            orb:'',
+                        });
+                        this.increment = 0;
+                    }
+
+                } else {
+                    if (this.increment > -(this.canvasRef.width - this.canvasRef.width / 4)) {
+
+                        this.increment -= 10;
+                        ctx.save();
+                        ctx.translate(800, 250);
+                        ctx.moveTo((this.state.xposCOM6 * 2)+this.increment, this.state.yposCOM6 * 2);
+                        ctx.lineTo((this.state.xposCOM6 * 2)+this.increment-50, this.state.yposCOM6 * 2);
+                        ctx.restore();
+                        ctx.stroke();
+                    } else {
+                        this.setState({
+                            shot: false,
+                            orb:'',
+                        });
+                        this.increment = 0;
+                    }
                 }
             }
 
@@ -136,7 +154,7 @@ class FloorPlan extends Component {
 
     greenOrb(ctx){
         ctx.beginPath();
-        ctx.arc(this.state.xposCOM4, this.state.yposCOM4, 20, 0, 2*Math.PI, false);
+        ctx.arc(this.state.xposCOM4*2, this.state.yposCOM4*2, 20, 0, 2*Math.PI, false);
         ctx.fillStyle = 'green';
         ctx.fill();
         ctx.lineWidth = 3;
@@ -147,7 +165,7 @@ class FloorPlan extends Component {
 
     yellowOrb(ctx){
         ctx.beginPath();
-        ctx.arc(this.state.xposCOM6, this.state.yposCOM6, 20, 0, 2*Math.PI, false);
+        ctx.arc(this.state.xposCOM6*2, this.state.yposCOM6*2, 20, 0, 2*Math.PI, false);
         ctx.fillStyle = 'yellow';
         ctx.fill();
         ctx.lineWidth = 3;
@@ -159,11 +177,7 @@ class FloorPlan extends Component {
     render() {
         return(
             <div>
-                <p>posxCOM4 : {this.state.xposCOM4}</p>
-                <p>posyCOM4 : {this.state.yposCOM4}</p>
-                <p>posxCOM6 : {this.state.xposCOM6}</p>
-                <p>posyCOM6 : {this.state.yposCOM6}</p>
-                <canvas style={{border: "1px solid #000000"}} width="1000" height="500" ref={ref => this.canvasRef = ref} />
+                <canvas width="1000" height="500" ref={ref => this.canvasRef = ref}/>
             </div>
         )
     }

@@ -81,16 +81,14 @@ En Wi-fi le --public + IP pour le frontend n'exposera pas le serveur pour d'autr
 
 # Reste à faire
 
-Pour le moment on peut faire seulement un tir depuis la position de la boule verte.
 Ajouter la possibilité de faire plusieurs tirs avec un délai entre chaque tir
  avec une jauge qui indique quand le prochain tir va être disponible et dont l'orientation du tir dépend
  du heading de la boule.
 
 Gestion des collisions sur l'écran de jeu en temps réel
+Attention : pour l'instant le tir dépend de la position de la boule (à changer)
 
 Éventuellement stocker l'état du canvas et pouvoir avoir une fonction de replay
-
-Améliorer l'aspect graphique
 
 Catch les exceptions à la connexion de la boule pour empêcher le serveur de s'arrêter et afficher plutôt un message d'erreur
 
@@ -100,6 +98,9 @@ Selon les erreurs renvoyées par la boule, proposer à l'utilisateur de ping son
 
 Implémentation de smart components and dumb components [Smart dumb components react](https://jaketrent.com/post/smart-dumb-components-react/)
 
+Tester les positions des sphero en fonction de la position qu'elles renvoient afin de determiner 
+la marge d'erreur et la taille du terrain
+
 # Documentation 
 * [Sphero JS API](https://sdk.sphero.com/community-apis/javascript-sdk/) 
 * [React-Workshop](https://github.com/react-bootcamp/react-workshop)
@@ -107,3 +108,4 @@ Implémentation de smart components and dumb components [Smart dumb components r
 ## Authors
 
 * **Baptiste Garcin**
+* Lucille Moise

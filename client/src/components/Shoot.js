@@ -11,7 +11,7 @@ class Shoot extends Component {
             zone: document.getElementById("shoot")
         };
         const manager = nipple.create(joystickParams);
-        manager.on('added', function(evt, nipple) {
+        manager.on('added', function(evt) {
             console.log("added");
             socket.emit('shoot');
         });
